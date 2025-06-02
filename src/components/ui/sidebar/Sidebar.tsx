@@ -3,6 +3,9 @@
 import cslx from "clsx";
 import Link from "next/link";
 
+// Cmponents
+import { If } from "@/components";
+
 //Store
 import { useUIStore } from "@/store";
 
@@ -17,7 +20,6 @@ import {
   IoShirtOutline,
   IoTicketOutline
 } from "react-icons/io5"
-import { If } from "@/components/if/if";
 
 export const Sidebar = () => {
   const isSideMenuOpen = useUIStore(state => state.isSideMenuOpen);
