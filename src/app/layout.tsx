@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-// Config
+// Fonts
 import { inter } from "@/config/fonts";
 
 // Styles

@@ -1,5 +1,5 @@
 // Fonts
-import { titleFont } from "@/config/fonts";
+import { inter } from "@/config/fonts";
 
 interface Props {
   title: string;
@@ -10,7 +10,7 @@ interface Props {
 export const Title = ({title, subtitle, className}: Props) => {
   return (
     <div className={`mt-3 text-white ${className}`}>
-      <h1 className={`${titleFont.className} antialiased text-1xl font-semibold my-7`}>
+      <h1 className={`${inter.className} antialiased text-1xl font-semibold my-7`}>
         { title }
       </h1>
 

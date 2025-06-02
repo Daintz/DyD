@@ -4,7 +4,7 @@ import Link from "next/link";
 import { IoSearchOutline, IoCartOutline } from "react-icons/io5"
 
 // Fonts
-import { titleFont } from "@/config/fonts";
+import { inter } from "@/config/fonts";
 
 export const TopMenu = () => {
   return (
@@ -15,7 +15,7 @@ export const TopMenu = () => {
         <Link
           href="/"
         >
-        <span className={`${titleFont.className} antialiased font-bold`}>D&D</span>
+        <span className={`${inter.className} antialiased font-bold`}>D&D</span>
         <span> | Gadgets</span>
         </Link>
       </div>
@@ -32,7 +32,7 @@ export const TopMenu = () => {
           className="m-2 p-2 rounded-md transition-all hover:bg-palet-orange"
           href="/category/airpods"
         >
-          Airpods
+          AirPods
         </Link>
       </div>
 
