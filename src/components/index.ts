@@ -1,4 +1,4 @@
-export * from './if/if';
+export * from './if/If';
 
 export * from './products/product-grid/ProductGrid';
 export * from './products/product-grid/ProductGridItem';
