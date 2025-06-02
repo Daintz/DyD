@@ -20,6 +20,7 @@ export const initialData: seedData = {
     {
       description: "Airpods de segunda generación",
       images: [
+        "https://res.cloudinary.com/dtttwxbgr/image/upload/v1748830016/111855_SP750-airpods_uaietv.jpg",
         "https://res.cloudinary.com/dtttwxbgr/image/upload/v1748830016/111855_SP750-airpods_uaietv.jpg"
       ],
       inStock: 5,
@@ -32,7 +33,8 @@ export const initialData: seedData = {
     {
       description: "Airpods pro de segunda generación",
       images: [
-        "https://res.cloudinary.com/dtttwxbgr/image/upload/v1748837015/0160300827_qk9lyw.jpg"
+        "https://res.cloudinary.com/dtttwxbgr/image/upload/v1748837015/0160300827_qk9lyw.jpg",
+        "https://res.cloudinary.com/dtttwxbgr/image/upload/v1748887652/case_front__r6ng7f1x18a6_large-removebg-preview_xun9j1.png"
       ],
       inStock: 5,
       price: 79990,
@@ -44,6 +46,7 @@ export const initialData: seedData = {
     {
       description: "Airpods de tercera generación",
       images: [
+        "https://res.cloudinary.com/dtttwxbgr/image/upload/v1748837185/airpods-3-a-generacion_caqxmo.png",
         "https://res.cloudinary.com/dtttwxbgr/image/upload/v1748837185/airpods-3-a-generacion_caqxmo.png"
       ],
       inStock: 5,
@@ -56,13 +59,14 @@ export const initialData: seedData = {
     {
       description: "Airpods de cuarta generación",
       images: [
+        "https://res.cloudinary.com/dtttwxbgr/image/upload/v1748838036/audifonos-cuarta-generacion_1_myudxz.png",
         "https://res.cloudinary.com/dtttwxbgr/image/upload/v1748838036/audifonos-cuarta-generacion_1_myudxz.png"
       ],
       inStock: 5,
       price: 79990,
       slug: "airpods_4nd_gen",
       tags: ["apple", "airpods", "headphones"],
-      title: "Airpods pro de segunda generación ANC",
+      title: "Airpods de cuarta generación ANC",
       type: "headphones"
     }
   ]

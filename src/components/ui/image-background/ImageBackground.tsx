@@ -11,8 +11,8 @@ export const ImageBackground = ({ src, alt }: Props) => {
       src={src}
       alt={alt}
       className="w-full object-cover"
-      width={500}
-      height={500}
+      width={10000}
+      height={10000}
     />
   );
 };

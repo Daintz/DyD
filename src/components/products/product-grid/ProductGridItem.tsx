@@ -1,27 +1,39 @@
-// interface
-import { Product } from "@/interfaces";
+'use client';
+
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+
+// interface
+import { Product } from "@/interfaces";
 
 interface Props {
   product: Product;
 };
 
 export const ProductGridItem = ({ product }: Props) => {
-  console.log(product.images[0]);
+  const [displayImage, setDisplayImage] = useState(product.images[0]);
+
   return (
     <div className="rounded-md overflow-hidden fade-in">
-      <Image
-        src={product.images[0]}
-        alt={product.title}
-        className="w-full object-cover"
-        width={500}
-        height={500}
-      />
+      <Link
+        href={`/product/${product.slug}`}
+      >
+        <Image
+          src={displayImage}
+          alt={product.title}
+          className="w-full overflow-hidden rounded h-100"
+          width={2000}
+          height={2000}
+          onMouseEnter={() => setDisplayImage(product.images[1])}
+          onMouseLeave={() => setDisplayImage(product.images[0])}
+        />
+      </Link>
 
       <div className="p-4 flex flex-col">
         <Link
-          href={product.slug}
+          className="hover:text-palet-orange"
+          href={`/product/${product.slug}`}
         >
           {product.title}
         </Link>
