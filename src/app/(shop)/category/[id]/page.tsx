@@ -1,11 +1,10 @@
-// import { notFound } from "next/navigation";
+import { notFound } from "next/navigation";
 
 // Components
 import { ProductGrid, Title } from "@/components";
 
 // Seed
 import { initialData } from "@/seed/seed";
-import { notFound } from "next/navigation";
 
 interface Props {
   params: {
@@ -15,7 +14,7 @@ interface Props {
 
 
 export default async function CategoryPage({params}: Props) {
-  const { id } = params;
+  const { id } = await params;
 
   if (id !== "products" && id !== "airpods") notFound();
 
