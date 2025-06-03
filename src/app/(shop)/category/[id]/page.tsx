@@ -6,12 +6,13 @@ import { ProductGrid, Title } from "@/components";
 // Seed
 import { initialData } from "@/seed/seed";
 
-interface Props {
-  params: {
-    id: string;
-  };
+interface Params {
+  id: string;
 };
 
+interface Props {
+  params: Promise<Params>;
+};
 
 export default async function CategoryPage({params}: Props) {
   const { id } = await params;
