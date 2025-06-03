@@ -7,7 +7,7 @@ export interface Product {
   slug: string;
   tags: string[];
   title: string;
-  type: validTypes;
+  type: Type;
 };
 
-export type validTypes = "apple" | "airpods" | "headphones" | "covers" | "chargers" | "portable chargers"
+export type Type = "apple" | "airpods" | "headphones" | "covers" | "chargers" | "portable chargers"
