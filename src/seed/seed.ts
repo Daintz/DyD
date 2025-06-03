@@ -26,7 +26,7 @@ export const initialData: seedData = {
       inStock: 5,
       price: 79990,
       slug: "airpods_2nd_gen",
-      tags: ["apple", "airpods", "headphones"],
+      tags: ["products", "apple", "airpods", "headphones"],
       title: "Airpods de segunda generación",
       type: "headphones"
     },
@@ -39,7 +39,7 @@ export const initialData: seedData = {
       inStock: 5,
       price: 79990,
       slug: "airpods_pro_2nd_gen",
-      tags: ["apple", "airpods", "headphones"],
+      tags: ["products", "apple", "airpods", "headphones"],
       title: "Airpods pro de segunda generación",
       type: "headphones"
     },
@@ -52,7 +52,7 @@ export const initialData: seedData = {
       inStock: 5,
       price: 79990,
       slug: "airpods_3nd_gen",
-      tags: ["apple", "airpods", "headphones"],
+      tags: ["products", "apple", "airpods", "headphones"],
       title: "Airpods pro de segunda generación ANC",
       type: "headphones"
     },
@@ -65,7 +65,7 @@ export const initialData: seedData = {
       inStock: 5,
       price: 79990,
       slug: "airpods_4nd_gen",
-      tags: ["apple", "airpods", "headphones"],
+      tags: ["products", "apple", "airpods", "headphones"],
       title: "Airpods de cuarta generación ANC",
       type: "headphones"
     }

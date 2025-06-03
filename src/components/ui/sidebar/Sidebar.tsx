@@ -27,15 +27,15 @@ export const Sidebar = () => {
 
   return (
     <div>
-
       <If condition={isSideMenuOpen}>
         <div
           className="fixed top-0 left-0 w-screen h-screen z-10 bg-black opacity-30"
-        />
+          />
       </If>
 
       <If condition={isSideMenuOpen}>
         <div
+          onClick={() => closeSideMenu()}
           className="fade-in fixed top-0 left-0 w-screen h-screen z-10 backdrop-filter backdrop-blur-sm"
         />
       </If>
@@ -124,7 +124,6 @@ export const Sidebar = () => {
           <span className="ml-3 text-xl">Usuarios</span>
         </Link>
       </nav>
-
     </div>
   )
 }

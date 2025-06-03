@@ -1,15 +1,37 @@
 // import { notFound } from "next/navigation";
 
-// interface Props {
-//   params: {
-//     id: string;
-//   };
-// };
+// Components
+import { ProductGrid, Title } from "@/components";
 
-export default async function CategoryPage() {
+// Seed
+import { initialData } from "@/seed/seed";
+import { notFound } from "next/navigation";
+
+interface Props {
+  params: {
+    id: string;
+  };
+};
+
+
+export default async function CategoryPage({params}: Props) {
+  const { id } = params;
+
+  if (id !== "products" && id !== "airpods") notFound();
+
+  const products = initialData.products.filter(product => product.tags.includes(id));
+
   return (
     <div>
-      <h1>Category Page</h1>
+      <Title
+        title="Productos"
+        subtitle="Todos los productos"
+        className="mb-2"
+      />
+
+      <ProductGrid
+        products={products}
+      />
     </div>
   );
 };
