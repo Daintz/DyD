@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+// import { redirect } from "next/navigation";
 
 // Components
 import { QuantitySelector, Title } from "@/components";
@@ -17,6 +18,9 @@ const productsInCart = [
 ];
 
 export default function CartPage() {
+
+  // redirect("/empty");
+
   return (
     <div className="flex justify-center items-center mb-72 px-10 sm:px-0">
       <div className="flex flex-col w-[1000px]">
@@ -67,7 +71,7 @@ export default function CartPage() {
             }
           </div>
 
-          <div className="bg-palet-found-black rounded-xl shadow-xl p-7">
+          <div className="bg-palet-found-black rounded-xl shadow-xl p-7 h-fit">
             <h2 className="text-2xl mb-2">Resumen de orden</h2>
 
             <div className="grid grid-cols-2">

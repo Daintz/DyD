@@ -1,7 +1,11 @@
-export default function NewAccount() {
+export default function NewAccount({ children }: {
+  children: React.ReactNode;
+}) {
   return (
-    <main className="">
-      <h1>Login Page</h1>
+    <main className="flex justify-center">
+      <div className="w-full sm:w-[350px] px-10">
+        {children}
+      </div>
     </main>
   );
 };

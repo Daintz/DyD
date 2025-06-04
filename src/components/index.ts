@@ -14,3 +14,4 @@ export * from './ui/not-found/PageNotFound';
 export * from './ui/main-section/MainSection';
 export * from './ui/title/Title';
 export * from './ui/title-center/TitleCenter';
+export * from './ui/footer/Footer';
