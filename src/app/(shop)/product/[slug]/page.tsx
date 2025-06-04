@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 
 // Components
-import { ProductSlideshow, QuantitySelector } from "@/components";
+import { ProductMobileSlideshow, ProductSlideshow, QuantitySelector } from "@/components";
 
 // Fonts
 import { inter } from "@/config/fonts";
@@ -28,9 +28,16 @@ export default async function ProductPage({ params }: Props) {
   return (
     <div className="mt-5 mb-20 grid grid-cols-1 md:grid-cols-3 gap-3">
       <div className="col-span-1 md:col-span-2">
+        <ProductMobileSlideshow
+          title={product.title}
+          images={product.images}
+          className="block md:hidden"
+          />
+
         <ProductSlideshow
           title={product.title}
           images={product.images}
+          className="hidden md:block"
         />
       </div>
 

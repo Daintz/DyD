@@ -1,6 +1,8 @@
 export * from './if/If';
 
 export * from './product/quantity-selector/QuantitySelector';
+
+export * from './product/slideshow/ProductMobileSlideshow';
 export * from './product/slideshow/ProductSlideshow';
 
 export * from './products/product-grid/ProductGrid';
