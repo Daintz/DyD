@@ -9,6 +9,9 @@ import { inter } from "@/config/fonts";
 // Seed
 import { initialData } from "@/seed/seed";
 
+// Utils
+import { formatToCOP } from "@/utils";
+
 interface Params {
   slug: string
 }
@@ -45,7 +48,7 @@ export default async function ProductPage({ params }: Props) {
         <h1 className={`${inter.className} antialiased font-bold text-xl`}>
           {product.title}
         </h1>
-        <p className="text-lg mb-5">${product.price}</p>
+        <p className="text-lg mb-5">{formatToCOP(product.price)}</p>
 
         <QuantitySelector
           quantity={2}

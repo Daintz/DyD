@@ -7,6 +7,9 @@ import Link from "next/link";
 // interface
 import { Product } from "@/interfaces";
 
+// Utils
+import { formatToCOP } from "@/utils";
+
 interface Props {
   product: Product;
 };
@@ -37,7 +40,7 @@ export const ProductGridItem = ({ product }: Props) => {
         >
           {product.title}
         </Link>
-        <span className="font-bold">{product.price}</span>
+        <span className="font-bold">{formatToCOP(product.price)}</span>
       </div>
     </div>
   )
