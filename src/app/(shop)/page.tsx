@@ -11,13 +11,14 @@ import { ImageBackground } from "@/components/ui/image-background/ImageBackgroun
 // import Pagination from "@/components/ui/pagination/Pagination";
 
 interface Props {
-  searchParams?: {
+  searchParams?: Promise<{
     page?: string
-  }
+  }>;
 };
 
 export default async function Home({ searchParams }: Props) {
-  const page = searchParams?.page ? parseInt(searchParams.page) : 1;
+  const params = await searchParams;
+  const page = params?.page ? parseInt(params.page) : 1;
 
   const { products } = await getPaginatedProductsWithImages({ page });
 
