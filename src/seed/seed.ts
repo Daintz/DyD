@@ -1,3 +1,5 @@
+import bcryptjs from "bcryptjs";
+
 interface SeedProduct {
   description: string;
   images: string[];
@@ -6,16 +8,47 @@ interface SeedProduct {
   slug: string;
   tags: string[];
   title: string;
-  type: validTypes;
+  type: ValidTypes;
 };
 
-type validTypes = "apple" | "airpods" | "headphones" | "covers" | "chargers" | "portable chargers"
+interface SeedUser {
+  email: string;
+  password: string;
+  name: string;
+  role: "admin" | "user";
+}
+
+type ValidTypes = "apple" | "airpods" | "headphones" | "covers" | "chargers" | "portable chargers"
 
 interface seedData {
+  users: SeedUser[];
+  categories: string[];
   products: SeedProduct[];
 }
 
 export const initialData: seedData = {
+  users: [
+    {
+      email: "correo@correo.com",
+      name: "Correo",
+      password: bcryptjs.hashSync("123456"),
+      role: "admin"
+    },
+    {
+      email: "dafeloru@correo.com",
+      name: "Daniel",
+      password: bcryptjs.hashSync("123456"),
+      role: "user"
+    }
+  ],
+  categories: [
+    "Apple",
+    "Airpods",
+    "Headphones",
+    "Covers",
+    "Chargers",
+    "Portable chargers"
+  ],
   products: [
     {
       description: "Airpods de segunda generación",

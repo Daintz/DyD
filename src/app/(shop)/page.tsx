@@ -1,15 +1,32 @@
+export const revalidate = 60;
+
+import { redirect } from "next/navigation";
+
+// Actions
+import { getPaginatedProductsWithImages } from "@/actions";
+
 // Components
 import { MainSection, ProductGrid, Title, TitleCenter } from "@/components";
 import { ImageBackground } from "@/components/ui/image-background/ImageBackground";
+// import Pagination from "@/components/ui/pagination/Pagination";
 
-// Seed
-import { initialData } from "@/seed/seed";
+interface Props {
+  searchParams?: {
+    page?: string
+  }
+};
 
-const products = initialData.products;
+export default async function Home({ searchParams }: Props) {
+  const page = searchParams?.page ? parseInt(searchParams.page) : 1;
 
-export default function Home() {
+  const { products } = await getPaginatedProductsWithImages({ page });
+
+  if(products.length === 0) {
+    redirect("/");
+  };
+
   return (
-    <>
+    <div>
       <MainSection />
 
       <div className="px-0 sm:px-10">
@@ -34,6 +51,6 @@ export default function Home() {
           products={products}
         />
       </div>
-    </>
+    </div>
   );
 };

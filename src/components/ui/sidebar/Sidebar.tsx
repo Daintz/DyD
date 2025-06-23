@@ -2,28 +2,40 @@
 
 import cslx from "clsx";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 
-// Cmponents
+// Components
 import { If } from "@/components";
+import ViewRolUser from "./viewRoles/ViewRolUser";
+import ViewRolAdmin from "./viewRoles/ViewRolAdmin";
 
-//Store
+// Store
 import { useUIStore } from "@/store";
+
+// Actions
+import { logout } from "@/actions";
 
 // Icons
 import {
   IoCloseOutline,
   IoLogInOutline,
   IoLogOutOutline,
-  IoPeopleOutline,
-  IoPersonOutline,
-  IoSearchOutline,
-  IoShirtOutline,
-  IoTicketOutline
-} from "react-icons/io5"
+  IoSearchOutline
+} from "react-icons/io5";
 
 export const Sidebar = () => {
   const isSideMenuOpen = useUIStore(state => state.isSideMenuOpen);
   const closeSideMenu = useUIStore(state => state.closeSideMenu);
+
+  const {data: session} = useSession();
+  const isAuthenticated = !!session?.user;
+  const rolUser = session?.user?.role;
+
+  const onLogout = async () => {
+    await logout();
+    window.location.reload();
+    closeSideMenu();
+  };
 
   return (
     <div>
@@ -43,7 +55,7 @@ export const Sidebar = () => {
       <nav
         className={
           cslx(
-            "fixed p-5 right-0 top-0 w-[500px] h-screen bg-palet-black z-20 shadow-2xl transform-all duration-300",
+            "fixed p-5 right-0 top-0 w-[220px] sm:w-[350px] md:w-[420px] lg:w-[500px] h-screen bg-palet-black z-20 shadow-2xl transform transform-all duration-300",
             {
               "translate-x-full": !isSideMenuOpen
             }
@@ -66,63 +78,38 @@ export const Sidebar = () => {
           />
         </div>
 
-        <Link
-          href="/"
-          className="flex items-center mt-10 p-2 hover: bg-gray100 rounded transition-all"
-        >
-          <IoPersonOutline size={30} />
-          <span className="ml-3 text-xl">Perfil</span>
-        </Link>
+        <ViewRolUser
+          rolUser={rolUser}
+          closeSideMenu={closeSideMenu}
+        />
 
-        <Link
-          href="/"
-          className="flex items-center mt-10 p-2 hover: bg-gray100 rounded transition-all"
-        >
-          <IoTicketOutline size={30} />
-          <span className="ml-3 text-xl">Ordenes</span>
-        </Link>
+        <If condition={isAuthenticated}>
+          <button
+            onClick={() => {
+              onLogout();
+            }}
+            className="flex items-center mt-10 p-2 hover:bg-gray100 rounded transition-all"
+          >
+            <IoLogOutOutline size={30} />
+            <span className="ml-3 text-xl">Salir</span>
+          </button>
+        </If>
 
-        <Link
-          href="/"
-          className="flex items-center mt-10 p-2 hover: bg-gray100 rounded transition-all"
-        >
-          <IoLogInOutline size={30} />
-          <span className="ml-3 text-xl">Ingresar</span>
-        </Link>
-
-        <Link
-          href="/"
-          className="flex items-center mt-10 p-2 hover: bg-gray100 rounded transition-all"
-        >
-          <IoLogOutOutline size={30} />
-          <span className="ml-3 text-xl">Salir</span>
-        </Link>
+        <If condition={!isAuthenticated}>
+          <Link
+            href="/auth/login"
+            className="flex items-center mt-10 p-2 hover:bg-gray100 rounded transition-all"
+          >
+            <IoLogInOutline size={30} />
+            <span className="ml-3 text-xl">Ingresar</span>
+          </Link>
+        </If>
 
         <div className="w-full h-px bg-gray-200 my-10" />
 
-        <Link
-          href="/"
-          className="flex items-center mt-10 p-2 hover: bg-gray100 rounded transition-all"
-        >
-          <IoShirtOutline size={30} />
-          <span className="ml-3 text-xl">Productos</span>
-        </Link>
-
-        <Link
-          href="/"
-          className="flex items-center mt-10 p-2 hover: bg-gray100 rounded transition-all"
-        >
-          <IoTicketOutline size={30} />
-          <span className="ml-3 text-xl">Ordenes</span>
-        </Link>
-
-        <Link
-          href="/"
-          className="flex items-center mt-10 p-2 hover: bg-gray100 rounded transition-all"
-        >
-          <IoPeopleOutline size={30} />
-          <span className="ml-3 text-xl">Usuarios</span>
-        </Link>
+        <ViewRolAdmin
+          rolUser={rolUser}
+        />
       </nav>
     </div>
   )
