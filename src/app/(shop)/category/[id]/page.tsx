@@ -1,10 +1,12 @@
+export const revalidate = 60
+
 import { notFound } from "next/navigation";
 
 // Components
 import { ProductGrid, Title } from "@/components";
 
-// Seed
-import { initialData } from "@/seed/seed";
+// Actions
+import { getPaginatedProductsWithImages } from "@/actions";
 
 interface Params {
   id: string;
@@ -14,14 +16,13 @@ interface Props {
   params: Promise<Params>;
 };
 
-const seedProducts = initialData.products;
-
 export default async function CategoryPage({ params }: Props) {
   const { id } = await params;
+  const page = 1;
 
   if (id !== "products" && id !== "airpods") notFound();
 
-  const products = seedProducts.filter(product => product.tags.includes(id));
+  const { products } = await getPaginatedProductsWithImages({ page });
 
   const labels = {
     'products': "Productos",

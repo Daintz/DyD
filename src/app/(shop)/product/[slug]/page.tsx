@@ -1,13 +1,18 @@
+export const revalidate = 604800;
+
+import { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 
+// Actions
+import { getProductBySlug } from "@/actions";
+
 // Components
-import { ProductMobileSlideshow, ProductSlideshow, QuantitySelector } from "@/components";
+import { ProductMobileSlideshow, ProductSlideshow } from "@/components";
+import StockLabel from "@/components/product/stock-label/StockLabel";
+import AddToCart from "./ui/AddToCart";
 
 // Fonts
 import { inter } from "@/config/fonts";
-
-// Seed
-import { initialData } from "@/seed/seed";
 
 // Utils
 import { formatToCOP } from "@/utils";
@@ -20,11 +25,32 @@ interface Props {
   params: Promise<Params>
 };
 
-const products = initialData.products;
+export async function generateMetadata(
+  { params }: Props,
+  // parent: ResolvingMetadata
+): Promise<Metadata> {
+  const slug = (await params).slug;
+
+  const product = await getProductBySlug(slug);
+
+  // const post = await fetch(`https://api.vercel.app/blog/${slug}`).then((res) =>
+  //   res.json()
+  // )
+
+  return {
+    title: product?.title ?? "Producto no encontrado",
+    description: product?.description ?? "",
+    openGraph: {
+      title: product?.title ?? "Producto no encontrado",
+      description: product?.description ?? "",
+      images: [`/products/${product?.images[1]}`]
+    }
+  };
+};
 
 export default async function ProductPage({ params }: Props) {
   const { slug } = await params;
-  const product = products.find(product => product.slug === slug);
+  const product = await getProductBySlug(slug);
 
   if(!product) notFound();
 
@@ -35,7 +61,7 @@ export default async function ProductPage({ params }: Props) {
           title={product.title}
           images={product.images}
           className="block md:hidden"
-          />
+        />
 
         <ProductSlideshow
           title={product.title}
@@ -45,18 +71,13 @@ export default async function ProductPage({ params }: Props) {
       </div>
 
       <div className="col-span-1 px-5">
+        <StockLabel slug={product.slug} />
         <h1 className={`${inter.className} antialiased font-bold text-xl`}>
           {product.title}
         </h1>
         <p className="text-lg mb-5">{formatToCOP(product.price)}</p>
 
-        <QuantitySelector
-          quantity={2}
-        />
-
-        <button className="btn-primary my-5">
-          Agregar al carrito
-        </button>
+        <AddToCart product={product}/>
 
         <h3 className="font-bold text-sm">Descripción</h3>
         <p className="font-light">

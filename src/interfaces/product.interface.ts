@@ -1,5 +1,5 @@
 export interface Product {
-  //todo: id: string;
+  id: string;
   description: string;
   images: string[];
   inStock: number;
@@ -7,7 +7,16 @@ export interface Product {
   slug: string;
   tags: string[];
   title: string;
-  type: Type;
+  //Todo: type: Type;
+};
+
+export interface CartProduct {
+  id: string;
+  slug: string;
+  title: string;
+  price: number;
+  quantity: number;
+  image: string;
 };
 
 export type Type = "apple" | "airpods" | "headphones" | "covers" | "chargers" | "portable chargers"
