@@ -1,6 +1,10 @@
 'use client';
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
+
+// Components
+import { If } from "@/components/if/If";
 
 // Icons
 import { IoSearchOutline, IoCartOutline } from "react-icons/io5"
@@ -9,10 +13,17 @@ import { IoSearchOutline, IoCartOutline } from "react-icons/io5"
 import { inter } from "@/config/fonts";
 
 // Store
-import { useUIStore } from "@/store";
+import { useCartStore, useUIStore } from "@/store";
 
 export const TopMenu = () => {
   const openSideMenu = useUIStore(state => state.openSideMenu);
+  const totalItemsInCart = useCartStore(state => state.getTotalItems());
+
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+  }, []);
 
   return (
     <nav className="flex px-5 justify-between items-center w-full">
@@ -54,12 +65,18 @@ export const TopMenu = () => {
 
         <Link
           className="mx-2"
-          href="/cart"
+          href={
+            ((totalItemsInCart === 0) && loading)
+              ? "/empty"
+              : "/cart"
+          }
         >
           <div className="relative">
-            <span className="absolute text-xs px-1 rounded-full font-bold -top-2 -right-2 bg-palet-orange text-white">
-              3
-            </span>
+            <If condition={loading && totalItemsInCart > 0}>
+              <span className="fade-in absolute text-xs px-1 rounded-full font-bold -top-2 -right-2 bg-palet-orange text-white">
+                {totalItemsInCart}
+              </span>
+            </If>
             <IoCartOutline className="w-5 h-5" />
           </div>
         </Link>
