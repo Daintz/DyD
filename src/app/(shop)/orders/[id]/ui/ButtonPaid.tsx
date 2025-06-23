@@ -15,13 +15,15 @@ interface Props {
   title: string,
   id: string,
   total: number,
-  isPaid: boolean
+  isPaid: boolean,
+  buyerEmail: string
 };
 
-export const ButtonPaid = ({ title, id, total, isPaid }: Props) => {
+export const ButtonPaid = ({ title, id, total, isPaid, buyerEmail }: Props) => {
   const [loading, setLoading] = useState(false);
 
   console.log("isPaid", isPaid);
+  console.log("buyerEmail", buyerEmail);
 
   const handleCheckout = async () => {
     setLoading(true);

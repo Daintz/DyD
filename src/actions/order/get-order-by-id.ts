@@ -23,6 +23,11 @@ export const getOrderById = async(id: string) => {
         OrderAddress: {
           where: { orderId: id }
         },
+        user: {
+          select: {
+            email: true
+          }
+        },
         OrderItem: {
           where: { orderId: id },
           select: {

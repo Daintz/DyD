@@ -121,6 +121,7 @@ export default async function OrderPage({ params }: Props) {
                 id={orderById!.id}
                 total={orderById!.total}
                 isPaid={orderById!.isPaid}
+                buyerEmail={orderById!.user.email}
               />
 
               {/* <Link
