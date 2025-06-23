@@ -14,8 +14,6 @@ export default async function OrdersPage() {
     redirect("auth/login");
   };
 
-
-
   return (
     <>
       <Title title="Orders" />

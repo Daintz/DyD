@@ -8,7 +8,6 @@ import { getPaginatedProductsWithImages } from "@/actions";
 // Components
 import { MainSection, ProductGrid, Title, TitleCenter } from "@/components";
 import { ImageBackground } from "@/components/ui/image-background/ImageBackground";
-// import Pagination from "@/components/ui/pagination/Pagination";
 
 interface Props {
   searchParams?: Promise<{
