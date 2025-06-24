@@ -33,7 +33,9 @@ export const TopMenu = () => {
         <Link
           href="/"
         >
-        <span className={`${inter.className} antialiased font-bold`}>D&D</span>
+        <span className={`${inter.className} antialiased font-bold`}>
+          D&D
+        </span>
         <span> | Gadgets</span>
         </Link>
       </div>
