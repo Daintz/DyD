@@ -31,7 +31,7 @@ export async function submitMessage(
             currency_id: "COP",
           },
         ],
-        metadata: { text },
+        metadata: { text }
       },
       });
       if (!preference.init_point) throw new Error('No se pudo generar el link de pago');
