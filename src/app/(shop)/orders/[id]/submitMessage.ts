@@ -27,21 +27,11 @@ export async function submitMessage(
             id: id,
             title: `Orden #${id.split("-").at(-1)}`,
             quantity: 1,
-            unit_price: 5000,
+            unit_price: 10000,
             currency_id: "COP",
           },
         ],
-        metadata: { text, orderId: id },
-        payer: {
-          email: "test_user_151206140@testuser.com"
-        },
-        back_urls: {
-          success: `${baseUrl}/success`,
-          failure: `${baseUrl}/failure`,
-          pending: `${baseUrl}/pending`,
-        },
-        notification_url: notificationUrl,
-        auto_return: "approved",
+        metadata: { text },
       },
       });
       if (!preference.init_point) throw new Error('No se pudo generar el link de pago');
