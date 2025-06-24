@@ -8,11 +8,9 @@ interface Props {
   inStock: number;
 
   onQuantityChanged: (quantity: number) => void;
-}
+};
 
 export const QuantitySelector = ({ quantity, inStock, onQuantityChanged }: Props) => {
-  console.log("quantity", quantity);
-
   return (
     <div className="flex">
       <button className="cursor-pointer" onClick={() => onQuantityChanged(quantity > 1 ? quantity - 1 : 1)}>
@@ -28,4 +26,4 @@ export const QuantitySelector = ({ quantity, inStock, onQuantityChanged }: Props
       </button>
     </div>
   )
-}
+};

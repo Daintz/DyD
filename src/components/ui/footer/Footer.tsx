@@ -15,8 +15,7 @@ export const Footer = () => {
             <span className="font-bold">D&D</span> | Shop {new Date().getFullYear()}
           </Link>
           <Link href="/contactus" className="hover:underline">Contáctenos</Link>
-          <Link href="/termsandconditions" className="hover:underline">Privacidad & Legal</Link>
-          <Link href="/" className="hover:underline">Ubicaciones</Link>
+          <Link href="/termsandconditions" className="hover:underline">Privacidad & Legal</Link> 
         </div>
 
         <div className="flex space-x-4">
@@ -24,7 +23,7 @@ export const Footer = () => {
             <FaFacebook className="w-5 h-5" />
           </a>
           <a href="https://www.instagram.com/tecnologiadyd/" target="_blank" aria-label="Instagram" className="hover:opacity-75">
-            <AiFillInstagram className="w-5 h-5" />
+            <AiFillInstagram className="w-6 h-6" />
           </a>
           <a href="https://wa.me/573137671413" target="_blank" aria-label="Whatsapp" className="hover:opacity-75">
             <BsWhatsapp className="w-5 h-5" />
