@@ -31,6 +31,11 @@ export async function submitMessage(
             currency_id: "COP",
           },
         ],
+        payer: buyerEmail
+          ? {
+              email: buyerEmail
+            }
+          : undefined,
         metadata: { text },
         back_urls: {
           success: `${backUrl}/success`,
@@ -39,6 +44,7 @@ export async function submitMessage(
         },
         notification_url: notificationUrl,
         auto_return: "approved",
+        statement_descriptor: "D&D Gadgets",
       },
       });
       if (!preference.init_point) throw new Error('No se pudo generar el link de pago');
