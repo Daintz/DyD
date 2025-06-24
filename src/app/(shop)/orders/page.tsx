@@ -18,7 +18,7 @@ export default async function OrdersPage() {
     <>
       <Title title="Orders" />
 
-      <div className="mb-10">
+      <div className="mb-[32.8rem]">
         <table className="min-w-full">
           <thead className="bg-palet-found-black border-b border-palet-found-black">
             <tr>

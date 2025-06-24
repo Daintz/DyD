@@ -22,9 +22,6 @@ interface Props {
 export const ButtonPaid = ({ title, id, total, isPaid, buyerEmail }: Props) => {
   const [loading, setLoading] = useState(false);
 
-  console.log("isPaid", isPaid);
-  console.log("buyerEmail", buyerEmail);
-
   const handleCheckout = async () => {
     setLoading(true);
     const url = await submitMessage(title, id, total);

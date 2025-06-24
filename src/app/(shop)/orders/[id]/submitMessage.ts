@@ -27,13 +27,13 @@ export async function submitMessage(
             id: id,
             title: `Orden #${id.split("-").at(-1)}`,
             quantity: 1,
-            unit_price: 1000,
+            unit_price: 5000,
             currency_id: "COP",
           },
         ],
         metadata: { text, orderId: id },
         payer: {
-          email: buyerEmail || "test_user_151206140@testuser.com"
+          email: "test_user_151206140@testuser.com"
         },
         back_urls: {
           success: `${baseUrl}/success`,

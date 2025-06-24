@@ -29,10 +29,8 @@ export default async function OrderPage({ params }: Props) {
 
   if (!ok) redirect("/");
 
-  console.log("orderById", orderById);
-
   return (
-    <div className="flex justify-center items-center mb-72 px-10 sm:px-0">
+    <div className="flex justify-center items-center mb-54 px-10 sm:px-0">
       <div className="flex flex-col w-[1000px]">
         <Title
           title={`Orden  #${id}`}
