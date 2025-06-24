@@ -42,7 +42,6 @@ export async function submitMessage(
           failure: `${backUrl}/failure`,
           pending: `${backUrl}/pending`
         },
-        notification_url: notificationUrl,
         auto_return: "approved",
         statement_descriptor: "D&D Gadgets",
       },
