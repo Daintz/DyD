@@ -17,6 +17,7 @@ export async function submitMessage(
   if (typeof total !== 'number' || total <= 0) throw new Error('Total inválido');
 
   const notificationUrl = `${process.env.MERCADOPAGO_NOTIFICATION_URL}/api/mercadopago/pagos`;
+  const backUrl = `${process.env.MERCADOPAGO_NOTIFICATION_URL}`;
 
   try {
     const preference = await new Preference(mercadopago).create({
@@ -32,9 +33,9 @@ export async function submitMessage(
         ],
         metadata: { text },
         back_urls: {
-          success: "https://www.tu-sitio/success",
-          failure: "http://www.tu-sitio/failure",
-          pending: "http://www.tu-sitio/pending"
+          success: `${backUrl}/success`,
+          failure: `${backUrl}/failure`,
+          pending: `${backUrl}/pending`
         },
         notification_url: notificationUrl,
         auto_return: "approved",

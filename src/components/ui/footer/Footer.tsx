@@ -15,7 +15,7 @@ export const Footer = () => {
             <span className="font-bold">D&D</span> | Shop {new Date().getFullYear()}
           </Link>
           <Link href="/contactus" className="hover:underline">Contáctenos</Link>
-          <Link href="/termsandconditions" className="hover:underline">Privacidad & Legal</Link> 
+          <Link href="/termsandconditions" className="hover:underline">Privacidad & Legal</Link>
         </div>
 
         <div className="flex space-x-4">
