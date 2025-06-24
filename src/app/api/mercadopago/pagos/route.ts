@@ -14,14 +14,14 @@ const mercadopago = new MercadoPagoConfig({
 
 export async function POST(req: NextRequest) {
   const searchParams = req.nextUrl.searchParams;
-  const type = searchParams.get('type');
-  const paymentId = searchParams.get('data.id');
+  const topic = searchParams.get('topic');
+  const paymentId = searchParams.get('id');
 
   console.log('📥 Webhook recibido');
-  console.log('🔍 Tipo:', type);
+  console.log('🔍 Tipo:', topic);
   console.log('🔍 ID del pago:', paymentId);
 
-  if (type !== 'payment' || !paymentId) {
+  if (topic !== 'payment' || !paymentId) {
     console.warn('⚠️ Webhook sin parámetros válidos:', searchParams.toString());
     return NextResponse.json({ error: 'Evento no válido' }, { status: 400 });
   };
