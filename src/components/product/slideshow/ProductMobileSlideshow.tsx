@@ -27,7 +27,6 @@ export const ProductMobileSlideshow = ({ images, title, className }: Props) => {
           height: "500px",
         }}
         pagination
-        navigation={true}
         autoplay={{
           delay: 2500
         }}
