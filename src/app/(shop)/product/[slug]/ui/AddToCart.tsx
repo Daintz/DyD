@@ -20,6 +20,8 @@ const AddToCart = ({ product }: Props) => {
 
   const [quantity, setQuantity] = useState<number>(1);
 
+  console.log("product", product);
+
   const addToCart = () => {
     const cartProduct: CartProduct = {
       id: product.id,
@@ -39,6 +41,7 @@ const AddToCart = ({ product }: Props) => {
       <QuantitySelector
         quantity={quantity}
         onQuantityChanged={setQuantity}
+        inStock={product.inStock}
       />
 
       <button
