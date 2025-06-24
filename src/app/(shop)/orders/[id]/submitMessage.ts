@@ -27,7 +27,7 @@ export async function submitMessage(
             id: id,
             title: `Orden #${id.split("-").at(-1)}`,
             quantity: 1,
-            unit_price: 10000,
+            unit_price: 1000,
             currency_id: "COP",
           },
         ],
