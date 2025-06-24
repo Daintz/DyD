@@ -17,6 +17,7 @@ export interface CartProduct {
   price: number;
   quantity: number;
   image: string;
+  inStock: number;
 };
 
 export type Type = "apple" | "airpods" | "headphones" | "covers" | "chargers" | "portable chargers"
