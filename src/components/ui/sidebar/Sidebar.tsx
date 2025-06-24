@@ -68,7 +68,7 @@ export const Sidebar = () => {
           onClick={() => closeSideMenu()}
         />
 
-        <div className="relative mt-14">
+        {/* <div className="relative mt-14">
           <IoSearchOutline size={20} className="absolute top-2 left-2" />
 
           <input
@@ -76,7 +76,7 @@ export const Sidebar = () => {
             placeholder="Buscar productos..."
             className="w-full bg-palet-found-black rounded pl-10 py-1 pr-10 border-b-2 text-xl border-gray-200 focus:outline-none focus:border-palet-orange"
           />
-        </div>
+        </div> */}
 
         <ViewRolUser
           rolUser={rolUser}

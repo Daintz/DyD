@@ -7,7 +7,7 @@ export const Footer = () => {
         <Link href="/" className="hover:underline">
           <span className="font-bold">D&D</span> | Shop {new Date().getFullYear()}
         </Link>
-        <Link href="/" className="hover:underline">Privacidad & Legal</Link>
+        <Link href="/termsandconditions" className="hover:underline">Privacidad & Legal</Link>
         <Link href="/" className="hover:underline">Ubicaciones</Link>
       </div>
     </footer>
