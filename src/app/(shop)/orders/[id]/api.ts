@@ -16,7 +16,8 @@ export async function submitMessage(
   if (typeof id !== 'string' || !id.trim()) throw new Error('ID inválido');
   if (typeof total !== 'number' || total <= 0) throw new Error('Total inválido');
 
-  const notificationUrl = `${process.env.MERCADOPAGO_NOTIFICATION_URL}/api/mercadopago/pagos`;
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://localhost:3000';
+  const notificationUrl = process.env.MERCADOPAGO_NOTIFICATION_URL || `${baseUrl}/api/mercadopago/pagos`;
 
   try {
     const preference = await new Preference(mercadopago).create({
@@ -31,13 +32,7 @@ export async function submitMessage(
           },
         ],
         metadata: { text },
-        back_urls: {
-          success: "https://www.tu-sitio/success",
-          failure: "http://www.tu-sitio/failure",
-          pending: "http://www.tu-sitio/pending"
-        },
-        notification_url: notificationUrl,
-        auto_return: "approved",
+        notification_url: notificationUrl
       },
       });
       if (!preference.init_point) throw new Error('No se pudo generar el link de pago');
