@@ -24,7 +24,7 @@ export const ButtonPaid = ({ title, id, total, isPaid, buyerEmail }: Props) => {
 
   const handleCheckout = async () => {
     setLoading(true);
-    const url = await submitMessage(title, id, total);
+    const url = await submitMessage(title, id, total, buyerEmail);
     window.open(url, "_blank");
     setLoading(false);
   };
@@ -50,24 +50,27 @@ export const ButtonPaid = ({ title, id, total, isPaid, buyerEmail }: Props) => {
           <span className="text-base font-medium">Pagar con Mercado Pago</span>
         </button>
 
-        <div className={
-          clsx(
-            "flex items-center rounded-lg py-2 px-3.5 text-xs font-bold text-white mb-5",
-            {
-              'bg-red-500': !isPaid,
-              'bg-green-700': isPaid,
-            }
-          )
-        }>
-          <IoCardOutline size={30} />
-          {/* <span className="mx-2">Pendiente</span> */}
-          <span className="mx-2">
-            {
-              isPaid ? "Pagada" : "No pagada"
-            }
-          </span>
-        </div>
+    
       </If>
     </>
   );
 };
+
+
+    // <div className={
+    //       clsx(
+    //         "flex items-center rounded-lg py-2 px-3.5 text-xs font-bold text-white mb-5",
+    //         {
+    //           'bg-red-500': !isPaid,
+    //           'bg-green-700': isPaid,
+    //         }
+    //       )
+    //     }>
+    //       <IoCardOutline size={30} />
+    //       {/* <span className="mx-2">Pendiente</span> */}
+    //       <span className="mx-2">
+    //         {
+    //           isPaid ? "Pagada" : "No pagada"
+    //         }
+    //       </span>
+    //     </div>

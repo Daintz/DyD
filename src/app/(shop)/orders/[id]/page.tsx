@@ -33,28 +33,11 @@ export default async function OrderPage({ params }: Props) {
     <div className="flex justify-center items-center mb-54 px-10 sm:px-0">
       <div className="flex flex-col w-[1000px]">
         <Title
-          title={`Orden  #${id}`}
+          title={`Orden  #${id.split("-").at(-1)}`}
         />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
           <div className="flex flex-col mt-5">
-            <div className={
-              clsx(
-                "flex items-center rounded-lg py-2 px-3.5 text-xs font-bold text-white mb-5",
-                {
-                  'bg-red-500': !orderById!.isPaid,
-                  'bg-green-700': orderById!.isPaid,
-                }
-              )
-            }>
-              <IoCardOutline size={30} />
-              {/* <span className="mx-2">Pendiente</span> */}
-              <span className="mx-2">
-                {
-                  orderById?.isPaid ? "Pagada" : "No pagada"
-                }
-              </span>
-            </div>
 
             {
               orderById?.OrderItem.map((product, index) => (
