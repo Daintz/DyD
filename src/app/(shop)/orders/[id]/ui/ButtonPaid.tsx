@@ -31,7 +31,7 @@ export const ButtonPaid = ({ title, id, total, isPaid, buyerEmail }: Props) => {
       alert("No se pudo iniciar el pago. Intenta nuevamente.");
     } finally {
       setLoading(false);
-    }
+    };
   };
 
   return (
@@ -54,28 +54,7 @@ export const ButtonPaid = ({ title, id, total, isPaid, buyerEmail }: Props) => {
           <SiMercadopago color="black" size={40} />
           <span className="text-base font-medium">Pagar con Mercado Pago</span>
         </button>
-
-    
       </If>
     </>
   );
 };
-
-
-    // <div className={
-    //       clsx(
-    //         "flex items-center rounded-lg py-2 px-3.5 text-xs font-bold text-white mb-5",
-    //         {
-    //           'bg-red-500': !isPaid,
-    //           'bg-green-700': isPaid,
-    //         }
-    //       )
-    //     }>
-    //       <IoCardOutline size={30} />
-    //       {/* <span className="mx-2">Pendiente</span> */}
-    //       <span className="mx-2">
-    //         {
-    //           isPaid ? "Pagada" : "No pagada"
-    //         }
-    //       </span>
-    //     </div>

@@ -45,6 +45,7 @@ export async function submitMessage(
         },
         auto_return: "approved",
         statement_descriptor: "D&D Gadgets",
+        notification_url: notificationUrl
       },
     });
 
