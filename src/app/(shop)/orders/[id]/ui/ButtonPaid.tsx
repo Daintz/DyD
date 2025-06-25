@@ -21,12 +21,17 @@ interface Props {
 
 export const ButtonPaid = ({ title, id, total, isPaid, buyerEmail }: Props) => {
   const [loading, setLoading] = useState(false);
-
   const handleCheckout = async () => {
     setLoading(true);
-    const url = await submitMessage(title, id, total, buyerEmail);
-    window.open(url, "_blank");
-    setLoading(false);
+    try {
+      const url = await submitMessage(title, id, total, buyerEmail);
+      window.location.href = url;
+    } catch (error) {
+      console.error("Error al iniciar el pago:", error);
+      alert("No se pudo iniciar el pago. Intenta nuevamente.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

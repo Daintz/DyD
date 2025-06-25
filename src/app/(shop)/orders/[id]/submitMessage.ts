@@ -27,7 +27,7 @@ export async function submitMessage(
             id: id,
             title: `Orden #${id.split("-").at(-1)}`,
             quantity: 1,
-            unit_price: 1000,
+            unit_price: 1000.00,
             currency_id: "COP",
           },
         ],
@@ -37,6 +37,7 @@ export async function submitMessage(
             }
           : undefined,
         metadata: { text },
+        external_reference: id,
         back_urls: {
           success: `${backUrl}/success`,
           failure: `${backUrl}/failure`,
@@ -45,9 +46,10 @@ export async function submitMessage(
         auto_return: "approved",
         statement_descriptor: "D&D Gadgets",
       },
-      });
-      if (!preference.init_point) throw new Error('No se pudo generar el link de pago');
-      return preference.init_point!;
+    });
+
+    if (!preference.init_point) throw new Error('No se pudo generar el link de pago');
+    return preference.init_point!;
   } catch (error: any) {
     console.error('❌ Error al crear preferencia de Mercado Pago:', error);
     throw new Error('No se pudo crear la preferencia de pago');
