@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { MercadoPagoConfig, Payment, MerchantOrder } from 'mercadopago';
+import { MercadoPagoConfig, Payment } from 'mercadopago';
 import { setTransactionId } from '@/actions';
 import prisma from '@/lib/prisma';
 
@@ -8,10 +8,15 @@ const mercadopago = new MercadoPagoConfig({
 });
 
 export async function POST(req: NextRequest) {
-  const searchParams = req.nextUrl.searchParams;
-  let topic = searchParams.get('topic');
-  let resourceId = searchParams.get('id');
+  let topic: string | null = null;
+  let resourceId: string | null = null;
 
+  // Intentar leer primero desde query params (modo antiguo)
+  const searchParams = req.nextUrl.searchParams;
+  topic = searchParams.get('topic');
+  resourceId = searchParams.get('id');
+
+  // Si no se encontró en query, leer desde el body JSON (modo moderno)
   if (!topic || !resourceId) {
     try {
       const body = await req.json();
@@ -26,60 +31,20 @@ export async function POST(req: NextRequest) {
   console.log('🔍 Tipo:', topic);
   console.log('🔍 ID:', resourceId);
 
-  if (!topic || !resourceId) {
-    console.warn('⚠️ Webhook sin parámetros válidos:', searchParams.toString());
-    return NextResponse.json({ error: 'Evento no válido' }, { status: 400 });
+  if (topic !== 'payment' || !resourceId) {
+    console.warn('⚠️ Webhook ignorado. No es de tipo "payment" o falta ID.');
+    return NextResponse.json({ ignored: true });
   }
 
   try {
-    if (topic === 'payment') {
-      const payment = await safeGetPayment(resourceId);
-      await handleApprovedPayment(payment);
-    }
-
-    else if (topic === 'merchant_order') {
-      const id = Number(resourceId);
-      if (isNaN(id)) {
-        console.warn('⚠️ ID inválido recibido para merchant_order');
-        return NextResponse.json({ error: 'ID inválido' }, { status: 400 });
-      };
-
-      let merchantOrder;
-
-      try {
-        merchantOrder = await safeGetMerchantOrder(id);
-      } catch (err: any) {
-        if (err.status === 400 || err.status === 404) {
-          console.warn('⚠️ El ID recibido no corresponde a una orden. Intentando como payment...');
-          const fullPayment = await safeGetPayment(id.toString());
-          await handleApprovedPayment(fullPayment);
-          return NextResponse.json({ received: true });
-        } else {
-          throw err;
-        };
-      };
-
-      const approvedPayment = merchantOrder.payments?.find((p: any) => p.status === 'approved');
-
-      if (!approvedPayment?.id) {
-        console.log('ℹ️ merchant_order sin pagos aprobados.');
-        return NextResponse.json({ received: true });
-      };
-
-      const fullPayment = await safeGetPayment(approvedPayment.id.toString());
-      await handleApprovedPayment(fullPayment);
-    } else {
-      console.warn('⚠️ Topic no manejado:', topic);
-      return NextResponse.json({ error: 'Topic no manejado' }, { status: 400 });
-    };
-
+    const payment = await safeGetPayment(resourceId);
+    await handleApprovedPayment(payment);
     return NextResponse.json({ received: true });
-
   } catch (error: any) {
     console.error('❌ Error al procesar webhook:', error);
     return NextResponse.json({ error: 'Error interno del servidor' }, { status: 500 });
-  };
-};
+  }
+}
 
 async function handleApprovedPayment(payment: any) {
   console.log('✅ Detalles del pago:');
@@ -91,28 +56,28 @@ async function handleApprovedPayment(payment: any) {
   if (payment.status !== 'approved') {
     console.log('ℹ️ Pago recibido pero no aprobado:', payment.status);
     return;
-  };
+  }
 
   const orderId = payment.metadata?.orderId;
   if (!orderId) {
     console.warn('⚠️ No se encontró orderId en metadata del pago');
     return;
-  };
+  }
 
   const order = await prisma.order.findUnique({ where: { id: orderId } });
 
   if (order?.transactionId === payment.id) {
     console.log('ℹ️ Orden ya procesada con este transactionId, no se repite la acción.');
     return;
-  };
+  }
 
   const result = await setTransactionId(orderId, payment.id);
   if (!result.ok) {
     console.error('❌ Error al actualizar la orden:', result.message);
   } else {
     console.log('✅ Orden actualizada con transactionId:', payment.id);
-  };
-};
+  }
+}
 
 async function safeGetPayment(paymentId: string, retries = 3, delay = 1500): Promise<any> {
   for (let i = 0; i < retries; i++) {
@@ -129,21 +94,4 @@ async function safeGetPayment(paymentId: string, retries = 3, delay = 1500): Pro
     }
   }
   throw new Error(`No se pudo obtener el pago ${paymentId} después de ${retries} intentos`);
-};
-
-async function safeGetMerchantOrder(orderId: number, retries = 5, delay = 2000): Promise<any> {
-  for (let i = 0; i < retries; i++) {
-    try {
-      const order = await new MerchantOrder(mercadopago).get({ id: orderId } as any);
-      return order;
-    } catch (err: any) {
-      if (err.status === 404 && i < retries - 1) {
-        console.log(`⌛ Reintentando orden (${i + 1}/${retries})...`);
-        await new Promise((resolve) => setTimeout(resolve, delay));
-      } else {
-        throw err;
-      };
-    };
-  };
-  throw new Error(`No se pudo obtener la orden ${orderId} después de ${retries} intentos`);
-};
+}
