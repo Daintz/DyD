@@ -1,11 +1,6 @@
-
 import { NextRequest, NextResponse } from 'next/server';
-import { MercadoPagoConfig, Payment } from 'mercadopago';
-
-// Actions
+import { MercadoPagoConfig, Payment, MerchantOrder } from 'mercadopago';
 import { setTransactionId } from '@/actions';
-
-// Libraries
 import prisma from '@/lib/prisma';
 
 const mercadopago = new MercadoPagoConfig({
@@ -15,55 +10,96 @@ const mercadopago = new MercadoPagoConfig({
 export async function POST(req: NextRequest) {
   const searchParams = req.nextUrl.searchParams;
   const topic = searchParams.get('topic');
-  const paymentId = searchParams.get('id');
+  const resourceId = searchParams.get('id');
 
   console.log('📥 Webhook recibido');
   console.log('🔍 Tipo:', topic);
-  console.log('🔍 ID del pago:', paymentId);
+  console.log('🔍 ID:', resourceId);
 
-  if (topic !== 'payment' || !paymentId) {
+  if (!topic || !resourceId) {
     console.warn('⚠️ Webhook sin parámetros válidos:', searchParams.toString());
     return NextResponse.json({ error: 'Evento no válido' }, { status: 400 });
-  };
+  }
 
   try {
-    const payment = await safeGetPayment(paymentId);
+    if (topic === 'payment') {
+      const payment = await safeGetPayment(resourceId);
+      await handleApprovedPayment(payment);
+    }
 
-    console.log('✅ Detalles del pago:');
-    console.log('🆔 ID:', payment.id);
-    console.log('💰 Monto:', payment.transaction_amount);
-    console.log('📧 Email:', payment.payer?.email);
-    console.log('📦 Estado:', payment.status);
+    else if (topic === 'merchant_order') {
+      const merchantOrderId = Number(resourceId);
+      if (isNaN(merchantOrderId)) {
+        console.warn('⚠️ ID inválido para merchant_order');
+        return NextResponse.json({ error: 'ID inválido' }, { status: 400 });
+      };
 
-    if (payment.status === 'approved') {
-      // Obtener el orderId desde metadata
-      const orderId = payment.metadata?.orderId;
-      if (orderId) {
-        // Idempotencia: verificar si la orden ya tiene este transactionId
-        const order = await prisma.order.findUnique({ where: { id: orderId } });
-        if (order?.transactionId === payment.id) {
-          console.log('ℹ️ Orden ya procesada con este transactionId, no se repite la acción.');
-        } else {
-          const result = await setTransactionId(orderId, payment.id);
-          if (!result.ok) {
-            console.error('❌ Error al actualizar la orden:', result.message);
-          } else {
-            console.log('✅ Orden actualizada con transactionId:', payment.id);
-          }
-        }
-      } else {
-        console.warn('⚠️ No se encontró orderId en metadata del pago');
-      }
-    } else {
-      console.log('ℹ️ Pago recibido pero no aprobado:', payment.status);
+      const merchantOrder = await new MerchantOrder(mercadopago).get({ id: merchantOrderId } as any);
+
+      const approvedPayment = merchantOrder.payments?.find(
+        (p: any) => p.status === 'approved'
+      );
+
+      if (!approvedPayment) {
+        console.log('ℹ️ merchant_order sin pagos aprobados.');
+        return NextResponse.json({ received: true });
+      };
+
+      if (!approvedPayment.id) {
+        console.warn('⚠️ El pago aprobado no tiene ID');
+        return;
+      };
+
+      // Ahora obtenemos el objeto de pago completo
+      const fullPayment = await safeGetPayment(approvedPayment.id.toString());
+      await handleApprovedPayment(fullPayment);
+    }
+
+    else {
+      console.warn('⚠️ Topic no manejado:', topic);
+      return NextResponse.json({ error: 'Topic no manejado' }, { status: 400 });
     }
 
     return NextResponse.json({ received: true });
+
   } catch (error: any) {
-    console.error('❌ Error al consultar el pago:', error);
+    console.error('❌ Error al procesar webhook:', error);
     return NextResponse.json({ error: 'Error interno del servidor' }, { status: 500 });
-  };
-};
+  }
+}
+
+async function handleApprovedPayment(payment: any) {
+  console.log('✅ Detalles del pago:');
+  console.log('🆔 ID:', payment.id);
+  console.log('💰 Monto:', payment.transaction_amount);
+  console.log('📧 Email:', payment.payer?.email);
+  console.log('📦 Estado:', payment.status);
+
+  if (payment.status !== 'approved') {
+    console.log('ℹ️ Pago recibido pero no aprobado:', payment.status);
+    return;
+  }
+
+  const orderId = payment.metadata?.orderId;
+  if (!orderId) {
+    console.warn('⚠️ No se encontró orderId en metadata del pago');
+    return;
+  }
+
+  const order = await prisma.order.findUnique({ where: { id: orderId } });
+
+  if (order?.transactionId === payment.id) {
+    console.log('ℹ️ Orden ya procesada con este transactionId, no se repite la acción.');
+    return;
+  }
+
+  const result = await setTransactionId(orderId, payment.id);
+  if (!result.ok) {
+    console.error('❌ Error al actualizar la orden:', result.message);
+  } else {
+    console.log('✅ Orden actualizada con transactionId:', payment.id);
+  }
+}
 
 async function safeGetPayment(paymentId: string, retries = 3, delay = 1500): Promise<any> {
   for (let i = 0; i < retries; i++) {
@@ -76,8 +112,8 @@ async function safeGetPayment(paymentId: string, retries = 3, delay = 1500): Pro
         await new Promise((resolve) => setTimeout(resolve, delay));
       } else {
         throw err;
-      };
-    };
-  };
+      }
+    }
+  }
   throw new Error(`No se pudo obtener el pago ${paymentId} después de ${retries} intentos`);
-};
+}
