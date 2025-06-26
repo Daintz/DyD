@@ -28,34 +28,38 @@ export async function POST(req: NextRequest) {
     }
 
     else if (topic === 'merchant_order') {
-      const merchantOrderId = Number(resourceId);
-      if (isNaN(merchantOrderId)) {
-        console.warn('⚠️ ID inválido para merchant_order');
+      const id = Number(resourceId);
+      if (isNaN(id)) {
+        console.warn('⚠️ ID inválido recibido para merchant_order');
         return NextResponse.json({ error: 'ID inválido' }, { status: 400 });
-      };
+      }
 
-      const merchantOrder = await new MerchantOrder(mercadopago).get({ id: merchantOrderId } as any);
+      let merchantOrder = null;
 
-      const approvedPayment = merchantOrder.payments?.find(
-        (p: any) => p.status === 'approved'
-      );
+      try {
+        merchantOrder = await new MerchantOrder(mercadopago).get({ id } as any);
+      } catch (err: any) {
+        if (err.status === 400 && err.message?.includes('Invalid Id')) {
+          console.warn('⚠️ El ID recibido no corresponde a una orden. Intentando como payment...');
+          // intentar como pago directamente
+          const fullPayment = await safeGetPayment(id.toString());
+          await handleApprovedPayment(fullPayment);
+          return NextResponse.json({ received: true });
+        } else {
+          throw err;
+        }
+      }
 
-      if (!approvedPayment) {
+      const approvedPayment = merchantOrder.payments?.find((p) => p.status === 'approved');
+
+      if (!approvedPayment?.id) {
         console.log('ℹ️ merchant_order sin pagos aprobados.');
         return NextResponse.json({ received: true });
-      };
+      }
 
-      if (!approvedPayment.id) {
-        console.warn('⚠️ El pago aprobado no tiene ID');
-        return;
-      };
-
-      // Ahora obtenemos el objeto de pago completo
       const fullPayment = await safeGetPayment(approvedPayment.id.toString());
       await handleApprovedPayment(fullPayment);
-    }
-
-    else {
+    } else {
       console.warn('⚠️ Topic no manejado:', topic);
       return NextResponse.json({ error: 'Topic no manejado' }, { status: 400 });
     }

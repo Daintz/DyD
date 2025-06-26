@@ -39,9 +39,9 @@ export async function submitMessage(
         metadata: { text },
         external_reference: id,
         back_urls: {
-          success: `${backUrl}/success`,
-          failure: `${backUrl}/failure`,
-          pending: `${backUrl}/pending`
+          success: `${backUrl}/orders/${id}/success`,
+          failure: `${backUrl}/orders/${id}/failure`,
+          pending: `${backUrl}/orders/${id}/pending`
         },
         auto_return: "approved",
         statement_descriptor: "D&D Gadgets",
