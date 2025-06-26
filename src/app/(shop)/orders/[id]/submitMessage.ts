@@ -36,7 +36,10 @@ export async function submitMessage(
               email: buyerEmail
             }
           : undefined,
-        metadata: { text },
+        metadata: {
+          orderId: id,
+          text
+        },
         external_reference: id,
         back_urls: {
           success: `${backUrl}/orders/${id}/success`,
