@@ -37,6 +37,8 @@ export const getOrderById = async(id: string) => {
             select: {
               title: true,
               slug: true,
+              description: true,
+              category: true,
               ProductImage: {
                 select: {
                   url: true

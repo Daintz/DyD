@@ -1,5 +1,7 @@
 "use server";
 
+import { getUserAddress } from "@/actions";
+import { auth } from "@/auth-config";
 import { MercadoPagoConfig, Preference } from "mercadopago";
 
 const mercadopago = new MercadoPagoConfig({
@@ -19,6 +21,16 @@ export async function submitMessage(
   const notificationUrl = `${process.env.MERCADOPAGO_NOTIFICATION_URL}/api/mercadopago/pagos`;
   const backUrl = `${process.env.MERCADOPAGO_NOTIFICATION_URL}`;
 
+  const session = await auth();
+
+  if (!session?.user.id) {
+    throw new Error('No se encontro el usuario');
+  };
+
+  const userAddress = await getUserAddress(session.user.id);
+  const firstName = userAddress?.firstName || "Nombre";
+  const lastName = userAddress?.lastName || "Apellido";
+
   try {
     const preference = await new Preference(mercadopago).create({
       body: {
@@ -26,6 +38,8 @@ export async function submitMessage(
           {
             id: id,
             title: `Orden #${id.split("-").at(-1)}`,
+            description: "Audífonos Bluetooth inalámbricos con estuche de carga",
+            category_id: "electronics",
             quantity: 1,
             unit_price: 2000.00,
             currency_id: "COP",
@@ -33,7 +47,9 @@ export async function submitMessage(
         ],
         payer: buyerEmail
           ? {
-              email: buyerEmail
+              email: buyerEmail,
+              name: firstName,
+              surname: lastName,
             }
           : undefined,
         metadata: {
