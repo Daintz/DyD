@@ -58,7 +58,7 @@ async function handleApprovedPayment(payment: any) {
     return;
   }
 
-  const orderId = payment.metadata?.orderId;
+  const orderId = payment.metadata?.orderId ?? payment.external_reference;
   if (!orderId) {
     console.warn('⚠️ No se encontró orderId en metadata del pago');
     return;
