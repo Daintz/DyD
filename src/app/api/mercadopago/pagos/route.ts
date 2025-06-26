@@ -121,7 +121,7 @@ async function safeGetPayment(paymentId: string, retries = 3, delay = 1500): Pro
   throw new Error(`No se pudo obtener el pago ${paymentId} después de ${retries} intentos`);
 };
 
-async function safeGetMerchantOrder(orderId: number, retries = 3, delay = 1500): Promise<any> {
+async function safeGetMerchantOrder(orderId: number, retries = 5, delay = 2000): Promise<any> {
   for (let i = 0; i < retries; i++) {
     try {
       const order = await new MerchantOrder(mercadopago).get({ id: orderId } as any);
