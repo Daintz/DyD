@@ -49,7 +49,7 @@ export async function POST(req: NextRequest) {
         };
       };
 
-      const approvedPayment = merchantOrder.payments?.find((p) => p.status === 'approved');
+      const approvedPayment = merchantOrder.payments?.find((p: any) => p.status === 'approved');
 
       if (!approvedPayment?.id) {
         console.log('ℹ️ merchant_order sin pagos aprobados.');
