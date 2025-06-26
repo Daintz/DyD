@@ -9,8 +9,18 @@ const mercadopago = new MercadoPagoConfig({
 
 export async function POST(req: NextRequest) {
   const searchParams = req.nextUrl.searchParams;
-  const topic = searchParams.get('topic');
-  const resourceId = searchParams.get('id');
+  let topic = searchParams.get('topic');
+  let resourceId = searchParams.get('id');
+
+  if (!topic || !resourceId) {
+    try {
+      const body = await req.json();
+      topic = body.type;
+      resourceId = body.data?.id?.toString();
+    } catch (e) {
+      console.warn("⚠️ No se pudo leer el body JSON:", e);
+    }
+  }
 
   console.log('📥 Webhook recibido');
   console.log('🔍 Tipo:', topic);
