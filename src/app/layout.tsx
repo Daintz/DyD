@@ -19,11 +19,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: "D&D | Gadgets",
     description: "Los mejores accesorios para el día a día aquí.",
-    url: "https://tusitio.com",
+    url: process.env.MERCADOPAGO_NOTIFICATION_URL,
     siteName: "D&D | Gadgets",
     images: [
       {
-        url: "/public/vercel.svg",
+        url: "./favicon.ico",
         width: 800,
         height: 600,
         alt: "Logo D&D Gadgets"
@@ -36,8 +36,26 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "D&D | Gadgets",
     description: "Los mejores accesorios para el día a día aquí.",
-    images: ["/public/vercel.svg"]
-  }
+    images: ["./favicon.ico"]
+  },
+  authors: [
+    { name: "D&D Gadgets", url: process.env.MERCADOPAGO_NOTIFICATION_URL }
+  ],
+  creator: "D&D Gadgets",
+  publisher: "D&D Gadgets",
+  robots: {
+    index: true,
+    follow: true,
+    nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      noimageindex: false
+    }
+  },
+  category: "ecommerce",
+  applicationName: "D&D Gadgets",
+  generator: "Next.js 14",
 };
 
 export default function RootLayout({
