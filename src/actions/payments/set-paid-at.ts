@@ -24,7 +24,7 @@ export const setPaidId = async(orderId: string, paidAt: Date, isPaid: boolean) =
     console.log(err);
     return {
       ok: false,
-      message: "No se pudo actualizar el id de la transacción"
+      message: "No se pudo actualizar el paid con el id de la transacción"
     };
   };
 };

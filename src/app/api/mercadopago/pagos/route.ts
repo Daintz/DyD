@@ -80,14 +80,14 @@ async function handleApprovedPayment(payment: any) {
 
     const paymentSearch = await new Payment(mercadopago).get({ id: payment.id });
     if (paymentSearch.status === "approved") {
-      const resultPaid = await setPaidId(payment.id, new Date(), true)
+      const resultPaid = await setPaidId(orderId, new Date(), true)
       if (!resultPaid.ok) {
         console.error('❌ Error al actualizar la orden:', result.message);
       } else {
         console.log('✅ Orden paid actualizada con transactionId:', payment.id);
       };
     } else {
-      const resultPaid = await setPaidId(payment.id, new Date(), false)
+      const resultPaid = await setPaidId(orderId, new Date(), false)
       if (!resultPaid.ok) {
         console.error('❌ Error al actualizar la orden:', result.message);
       } else {
