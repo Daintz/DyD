@@ -14,7 +14,30 @@ export const metadata: Metadata = {
     template:  "%s - D&D | Gadgets",
     default: "Home - D&D | Gadgets"
   },
-  description: "Accesorios tecnológicos",
+  description: "Los mejores accesorios para el dia a dia aqui. Relojes inteligentes, Airpods, Parlantes, Gadgets y más",
+  keywords: ["gadgets", "accesorios", "tecnología", "relojes inteligentes", "airpods", "parlantes"],
+  openGraph: {
+    title: "D&D | Gadgets",
+    description: "Los mejores accesorios para el día a día aquí.",
+    url: "https://tusitio.com",
+    siteName: "D&D | Gadgets",
+    images: [
+      {
+        url: "/public/vercel.svg",
+        width: 800,
+        height: 600,
+        alt: "Logo D&D Gadgets"
+      }
+    ],
+    locale: "es_CO",
+    type: "website"
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "D&D | Gadgets",
+    description: "Los mejores accesorios para el día a día aquí.",
+    images: ["/public/vercel.svg"]
+  }
 };
 
 export default function RootLayout({

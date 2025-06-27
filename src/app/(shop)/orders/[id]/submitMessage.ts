@@ -41,7 +41,7 @@ export async function submitMessage(
             description: "Audífonos Bluetooth inalámbricos con estuche de carga",
             category_id: "electronics",
             quantity: 1,
-            unit_price: 2000.00,
+            unit_price: total,
             currency_id: "COP",
           },
         ],

@@ -37,7 +37,6 @@ export default async function OrdersPage() {
             </tr>
           </thead>
           <tbody>
-
             {
               orders.map(order => (
                 <tr key={order.id} className="bg-palet-black border-b border-palet-found-black transition duration-300 ease-in-out hover:bg-palet-found-black">
@@ -58,14 +57,20 @@ export default async function OrdersPage() {
                     </If>
                   </td>
                   <td className="text-sm text-white font-light px-6 ">
-                    <Link href={`/orders/${order.id}`} className="hover:underline">
-                      Ver orden
-                    </Link>
+                    <If condition={order.isPaid}>
+                      <Link href={`/orders/${order.id}/success`} className="hover:underline">
+                        Ver orden
+                      </Link>
+                    </If>
+                    <If condition={!order.isPaid}>
+                      <Link href={`/orders/${order.id}`} className="hover:underline">
+                        Ver orden
+                      </Link>
+                    </If>
                   </td>
                 </tr>
               ))
             }
-
           </tbody>
         </table>
       </div>

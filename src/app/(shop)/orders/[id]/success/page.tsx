@@ -103,14 +103,6 @@ export default async function OrderSuccessPage({ params }: Props) {
             </div>
 
             <div className="mt-5 mb-2 w-full">
-              <ButtonPaid
-                title={"Carrito"}
-                id={orderById!.id}
-                total={orderById!.total}
-                isPaid={orderById!.isPaid}
-                buyerEmail={orderById!.user.email}
-              />
-
               <div className="flex items-center rounded-lg py-2 px-3.5 text-xs font-bold text-white mb-5 bg-green-700">
                 <IoCardOutline size={30} />
                 <span className="mx-2">
