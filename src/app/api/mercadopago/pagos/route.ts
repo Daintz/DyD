@@ -92,6 +92,7 @@ async function handleApprovedPayment(payment: any) {
         console.error('❌ Error al actualizar la orden:', result.message);
       } else {
         console.log('✅ Orden paid actualizada con transactionId:', payment.id);
+      };
     };
   };
 };
