@@ -71,7 +71,7 @@ async function handleApprovedPayment(payment: any) {
     return;
   }
 
-  const result = await setTransactionId(orderId, payment.id);
+  const result = await setTransactionId(orderId, String(payment.id));
   if (!result.ok) {
     console.error('❌ Error al actualizar la orden:', result.message);
   } else {
