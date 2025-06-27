@@ -86,6 +86,12 @@ async function handleApprovedPayment(payment: any) {
       } else {
         console.log('✅ Orden paid actualizada con transactionId:', payment.id);
       };
+    } else {
+      const resultPaid = await setPaidId(payment.id, new Date(), false)
+      if (!resultPaid.ok) {
+        console.error('❌ Error al actualizar la orden:', result.message);
+      } else {
+        console.log('✅ Orden paid actualizada con transactionId:', payment.id);
     };
   };
 };
