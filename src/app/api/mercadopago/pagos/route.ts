@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { MercadoPagoConfig, Payment } from 'mercadopago';
 import { setTransactionId } from '@/actions';
 import prisma from '@/lib/prisma';
+import { setPaidId } from '@/actions/payments/set-paid-at';
 
 const mercadopago = new MercadoPagoConfig({
   accessToken: process.env.MERCADOPAGO_ACCESS_TOKEN!,
@@ -24,8 +25,8 @@ export async function POST(req: NextRequest) {
       resourceId = body.data?.id?.toString();
     } catch (e) {
       console.warn("⚠️ No se pudo leer el body JSON:", e);
-    }
-  }
+    };
+  };
 
   console.log('📥 Webhook recibido');
   console.log('🔍 Tipo:', topic);
@@ -34,7 +35,7 @@ export async function POST(req: NextRequest) {
   if (topic !== 'payment' || !resourceId) {
     console.warn('⚠️ Webhook ignorado. No es de tipo "payment" o falta ID.');
     return NextResponse.json({ ignored: true });
-  }
+  };
 
   try {
     const payment = await safeGetPayment(resourceId);
@@ -43,8 +44,8 @@ export async function POST(req: NextRequest) {
   } catch (error: any) {
     console.error('❌ Error al procesar webhook:', error);
     return NextResponse.json({ error: 'Error interno del servidor' }, { status: 500 });
-  }
-}
+  };
+};
 
 async function handleApprovedPayment(payment: any) {
   console.log('✅ Detalles del pago:');
@@ -56,28 +57,38 @@ async function handleApprovedPayment(payment: any) {
   if (payment.status !== 'approved') {
     console.log('ℹ️ Pago recibido pero no aprobado:', payment.status);
     return;
-  }
+  };
 
   const orderId = payment.metadata?.orderId ?? payment.external_reference;
   if (!orderId) {
     console.warn('⚠️ No se encontró orderId en metadata del pago');
     return;
-  }
+  };
 
   const order = await prisma.order.findUnique({ where: { id: orderId } });
 
   if (order?.transactionId === payment.id) {
     console.log('ℹ️ Orden ya procesada con este transactionId, no se repite la acción.');
     return;
-  }
+  };
 
   const result = await setTransactionId(orderId, String(payment.id));
   if (!result.ok) {
     console.error('❌ Error al actualizar la orden:', result.message);
   } else {
     console.log('✅ Orden actualizada con transactionId:', payment.id);
-  }
-}
+
+    const paymentSearch = await new Payment(mercadopago).get({ id: payment.id });
+    if (paymentSearch.status === "approved") {
+      const resultPaid = await setPaidId(payment.id, new Date(), true)
+      if (!resultPaid.ok) {
+        console.error('❌ Error al actualizar la orden:', result.message);
+      } else {
+        console.log('✅ Orden paid actualizada con transactionId:', payment.id);
+      };
+    };
+  };
+};
 
 async function safeGetPayment(paymentId: string, retries = 3, delay = 1500): Promise<any> {
   for (let i = 0; i < retries; i++) {
@@ -90,8 +101,8 @@ async function safeGetPayment(paymentId: string, retries = 3, delay = 1500): Pro
         await new Promise((resolve) => setTimeout(resolve, delay));
       } else {
         throw err;
-      }
-    }
-  }
+      };
+    };
+  };
   throw new Error(`No se pudo obtener el pago ${paymentId} después de ${retries} intentos`);
-}
+};
