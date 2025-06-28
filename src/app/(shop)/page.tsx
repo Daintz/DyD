@@ -36,16 +36,20 @@ export default async function Home({ searchParams }: Props) {
           className="mb-2"
         />
 
-        <ImageBackground
-          src="https://res.cloudinary.com/dtttwxbgr/image/upload/v1748839317/airpods_-_Copy_bqx4t1.png"
-          alt="AirPods"
-        />
+        <div
+          className="mb-25"
+        >
+          <ImageBackground
+            src="https://res.cloudinary.com/dtttwxbgr/image/upload/v1748839317/airpods_-_Copy_bqx4t1.png"
+            alt="AirPods"
+          />
+        </div>
 
-        <Title
+        {/* <Title
           title="Productos"
           subtitle="Todos los productos"
           className="mb-2"
-        />
+        /> */}
 
         <ProductGrid
           products={products}
