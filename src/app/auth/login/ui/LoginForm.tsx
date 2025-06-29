@@ -1,20 +1,23 @@
 "use client";
 
-import Link from "next/link";
 import { useActionState, useEffect } from "react";
+import Link from "next/link";
+import clsx from "clsx";
+
+// Components
+import { If } from "@/components";
 
 // Actions
 import { authenticate } from "@/actions";
-import { If } from "@/components";
+
+// Icons
 import { IoInformationOutline } from "react-icons/io5";
-import clsx from "clsx";
 
 const LoginForm = () => {
   const [errorMessage, formAction, isPending] = useActionState(authenticate, undefined);
 
   useEffect(() => {
     if (errorMessage === "Sucess") {
-      // router.replace("/");
       window.location.replace("/");
     };
   }, [errorMessage]);
