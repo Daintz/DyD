@@ -7,7 +7,7 @@ interface Props {
 
 export const ImageBackground = ({ src, alt }: Props) => {
   return (
-    <div className="bg-white w-full h-45 relative">
+    <div className="w-full h-50 relative">
       <Image
         src={src}
         alt={alt}

@@ -40,7 +40,7 @@ export default async function Home({ searchParams }: Props) {
           className="mb-25"
         >
           <ImageBackground
-            src="https://res.cloudinary.com/dtttwxbgr/image/upload/v1748839317/airpods_-_Copy_bqx4t1.png"
+            src="https://res.cloudinary.com/dtttwxbgr/image/upload/v1751166350/image-background-1000x200mm_1000_x_120_mm_sn0o32.png"
             alt="AirPods"
           />
         </div>

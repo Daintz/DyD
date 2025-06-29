@@ -22,7 +22,7 @@ export const Footer = () => {
           <a href="https://www.facebook.com/profile.php?id=61570094964123" target="_blank" aria-label="Facebook" className="hover:opacity-75">
             <FaFacebook className="w-5 h-5" />
           </a>
-          <a href="https://www.instagram.com/tecnologiadyd/" target="_blank" aria-label="Instagram" className="hover:opacity-75">
+          <a href="https://www.instagram.com/gadgets_dyd/" target="_blank" aria-label="Instagram" className="hover:opacity-75">
             <AiFillInstagram className="w-6 h-6" />
           </a>
           <a href="https://wa.me/573137671413" target="_blank" aria-label="Whatsapp" className="hover:opacity-75">
