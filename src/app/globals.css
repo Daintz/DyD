@@ -65,3 +65,12 @@ body {
 .btn-disabled {
   @apply bg-palet-orange-dark text-white py-2 px-4 rounded transition-all cursor-pointer;
 }
+
+/* POPUS */
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(40px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+.animate-fade-in-up {
+  animation: fade-in-up 0.3s cubic-bezier(.4,0,.2,1) both;
+}

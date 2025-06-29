@@ -15,6 +15,7 @@ export * from './ui/sidebar/Sidebar';
 export * from './ui/top-menu/TopMenu';
 export * from './ui/not-found/PageNotFound';
 export * from './ui/main-section/MainSection';
+export * from './ui/message/Message';
 export * from './ui/title/Title';
 export * from './ui/title-center/TitleCenter';
 export * from './ui/footer/Footer';
