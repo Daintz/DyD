@@ -16,15 +16,15 @@ interface SeedUser {
   password: string;
   name: string;
   role: "admin" | "user";
-}
+};
 
-type ValidTypes = "apple" | "airpods" | "headphones" | "covers" | "chargers" | "portable chargers"
+type ValidTypes = "apple" | "airpods" | "headphones" | "covers" | "chargers" | "portable chargers";
 
 interface seedData {
   users: SeedUser[];
   categories: string[];
   products: SeedProduct[];
-}
+};
 
 export const initialData: seedData = {
   users: [

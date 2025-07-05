@@ -4,6 +4,9 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+// Components
+import AddToCart from "./ui/add-to-cart";
+
 // interface
 import { Product } from "@/interfaces";
 
@@ -28,7 +31,7 @@ export const ProductGridItem = ({ product }: Props) => {
           className="w-full overflow-hidden rounded h-50 object-cover"
           width={2000}
           height={2000}
-          onMouseEnter={() => setDisplayImage(product.images[0])}
+          onMouseEnter={() => setDisplayImage(product.images[1])}
           onMouseLeave={() => setDisplayImage(product.images[0])}
         />
       </Link>
@@ -40,7 +43,13 @@ export const ProductGridItem = ({ product }: Props) => {
         >
           {product.title}
         </Link>
-        <span className="font-bold">{formatToCOP(product.price)}</span>
+        <div>
+          <span className="font-bold">{formatToCOP(product.price)}</span>
+          <span className="font-bold">ㅤ</span>
+          <span className="font-bold"><del>{formatToCOP(product.price + 30000)}</del></span>
+        </div>
+
+        {/* <AddToCart product={product}/> */}
       </div>
     </div>
   )

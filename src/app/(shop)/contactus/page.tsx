@@ -12,7 +12,7 @@ const ContactUsPage = async() => {
         <h2 className="text-3xl md:text-4xl font-extrabold italic mb-2">
           MEDIOS DE CONTACTO
         </h2>
-        <p className=" font-medium mb-12">
+        <p className="font-medium mb-12">
           Nosotros amamos mantenerte en contacto, por eso disponemos de diferentes medios de comunicación para ti.
         </p>
 

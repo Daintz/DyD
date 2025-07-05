@@ -11,7 +11,7 @@ interface Props {
 export const TitleCenter = ({title, subtitle, className}: Props) => {
   return (
     <div className={`mt-10 text-white ${className} flex flex-col items-center justify-center text-center`}>
-      <h1 className={`${inter.className} antialiased text-5xl font-semibold my-2`}>
+      <h1 className={`${inter.className} text-4xl md:text-5xl font-semibold my-2 italic`}>
         { title }
       </h1>
 

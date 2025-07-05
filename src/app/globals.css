@@ -74,3 +74,13 @@ body {
 .animate-fade-in-up {
   animation: fade-in-up 0.3s cubic-bezier(.4,0,.2,1) both;
 }
+
+/* ANIMATE MOVE LEFT */
+@keyframes move-left-right {
+  0% { transform: translateX(-30px);}
+  50% { transform: translateX(30px);}
+  100% { transform: translateX(-30px);}
+}
+.animate-move-left-right {
+  animation: move-left-right 2s ease-in-out infinite;
+}
