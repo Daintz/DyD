@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 // Components
-import AddToCart from "./ui/add-to-cart";
+// import AddToCart from "./ui/add-to-cart";
 
 // interface
 import { Product } from "@/interfaces";
@@ -38,7 +38,6 @@ export const ProductGridItem = ({ product }: Props) => {
 
       <div className="p-4 flex flex-col">
         <Link
-          className="hover:text-palet-orange"
           href={`/product/${product.slug}`}
         >
           {product.title}

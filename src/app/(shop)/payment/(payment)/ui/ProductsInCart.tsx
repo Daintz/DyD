@@ -1,11 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-
-// Components
-import { QuantitySelector } from "@/components";
 
 // Utils
 import { formatToCOP } from "@/utils";
@@ -17,10 +13,6 @@ function ProductsInCart() {
   const [loaded, setLoaded] = useState(false);
 
   const productsInCart = useCartStore(state => state.cart);
-  const updateProductQuantity = useCartStore(state => state.updateProductQuantity);
-  const deleteProduct = useCartStore(state => state.deleteProduct);
-
-  console.log("productsInCart", productsInCart);
 
   useEffect(() => {
     setLoaded(true);
@@ -51,28 +43,12 @@ function ProductsInCart() {
           />
 
           <div>
-            <Link
-            className="hover:underline cursor-pointer"
-              href={`/product/${product.slug}`}
-            >
-            <p>{product.title}</p>
-            </Link>
-            <p>{formatToCOP(product.price)}</p>
-
-            <QuantitySelector
-              quantity={product.quantity}
-              onQuantityChanged={(value) => updateProductQuantity(product, value)}
-              inStock={product.inStock}
-            />
-
-              <button
-                className="hover:underline cursor-pointer mt-3"
-                onClick={() => deleteProduct(product)}
-              >
-                Eliminar
-              </button>
-            </div>
+            <span>
+            <p>{product.title} ({product.quantity})</p>
+            </span>
+            <p className="font-bold">{formatToCOP(product.price * product.quantity)}</p>
           </div>
+        </div>
         ))
       }
     </>

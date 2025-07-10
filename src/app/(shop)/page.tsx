@@ -5,12 +5,13 @@ import { redirect } from "next/navigation";
 // Components
 import { ImageBackground } from "@/components/ui/image-background/ImageBackground";
 import { AnimateMoveLeft } from "@/components/ui/animate-move-left/AnimateMoveLeft";
+import { Notification } from "@/components/ui/notification/Notification";
 
 // Actions
 import { getPaginatedProductsWithImages } from "@/actions";
 
 // Components
-import { MainSection, ProductGrid, Title, TitleCenter } from "@/components";
+import { MainSection, ProductGrid, TitleCenter } from "@/components";
 
 interface Props {
   searchParams?: Promise<{
@@ -83,6 +84,8 @@ export default async function Home({ searchParams }: Props) {
           products={products}
         />
       </div>
+
+      <Notification timeout={5000}/>
     </div>
   );
 };

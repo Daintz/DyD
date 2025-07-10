@@ -10,6 +10,7 @@ async function main() {
   await  prisma.orderItem.deleteMany();
   await  prisma.order.deleteMany();
 
+  await  prisma.userAddress.deleteMany();
   await  prisma.user.deleteMany();
   await  prisma.productImage.deleteMany();
   await  prisma.product.deleteMany();
@@ -44,8 +45,9 @@ async function main() {
       }
     })
 
-    const imagesData = images.map(image => ({
+    const imagesData = images.map((image, index) => ({
       url: image,
+      position: index,
       productId: dbProduct.id
     }));
 

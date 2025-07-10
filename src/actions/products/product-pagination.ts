@@ -1,4 +1,4 @@
-'use server';
+"use server";
 
 import prisma from "@/lib/prisma";
 
@@ -37,7 +37,7 @@ export const getPaginatedProductsWithImages = async ({
       products: products.map(product => ({
         ...product,
         images: product.ProductImage.map(image => image.url)
-      }))
+      })).sort((a, b) => a.position - b.position)
     };
   } catch (err) {
     console.log(err);

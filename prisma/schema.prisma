@@ -10,8 +10,8 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("POSTGRES_PRISMA_URL")
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
   directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
@@ -27,13 +27,15 @@ model Category {
 }
 
 model Product {
-  id          String   @id @default(uuid())
-  title       String
-  description String
-  inStock     Int
-  price       Float    @default(0)
-  slug        String   @unique
-  tags        String[] @default([])
+  id           String   @id @default(uuid())
+  title        String
+  description  String
+  inStock      Int
+  price        Float    @default(0)
+  priceInOffer Float    @default(0)
+  slug         String   @unique
+  tags         String[] @default([])
+  position     Int
 
   category   Category @relation(fields: [categoryId], references: [id])
   categoryId String
@@ -43,8 +45,9 @@ model Product {
 }
 
 model ProductImage {
-  id  Int    @id @default(autoincrement())
-  url String
+  id       Int    @id @default(autoincrement())
+  url      String
+  position Int
 
   product   Product @relation(fields: [productId], references: [id])
   productId String
@@ -89,8 +92,8 @@ model Order {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  user   User   @relation(fields: [userId], references: [id])
-  userId String
+  user   User?   @relation(fields: [userId], references: [id])
+  userId String?
 
   OrderItem    OrderItem[]
   OrderAddress OrderAddress?
@@ -119,6 +122,7 @@ model OrderAddress {
   postalCode String
   city       String
   phone      String
+  email      String?
 
   order   Order  @relation(fields: [orderId], references: [id])
   orderId String @unique

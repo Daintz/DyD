@@ -38,7 +38,7 @@ export const Sidebar = () => {
   };
 
   return (
-    <div>
+    <div className="mt-[55px]">
       <If condition={isSideMenuOpen}>
         <div
           className="fixed top-0 left-0 w-screen h-screen z-10 bg-black opacity-30"
@@ -48,14 +48,14 @@ export const Sidebar = () => {
       <If condition={isSideMenuOpen}>
         <div
           onClick={() => closeSideMenu()}
-          className="fade-in fixed top-0 left-0 w-screen h-screen z-10 backdrop-filter backdrop-blur-sm"
+          className="fade-in fixed top-0 left-0 w-screen h-screen z-100 backdrop-filter backdrop-blur-sm"
         />
       </If>
 
       <nav
         className={
           cslx(
-            "fixed p-5 right-0 top-0 w-[220px] sm:w-[350px] md:w-[420px] lg:w-[500px] h-screen bg-palet-black z-20 shadow-2xl transform transform-all duration-300",
+            "fixed p-5 right-0 top-0 z-100 w-[220px] sm:w-[350px] md:w-[420px] lg:w-[500px] h-screen bg-palet-black z-20 shadow-2xl transform transform-all duration-300",
             {
               "translate-x-full": !isSideMenuOpen
             }

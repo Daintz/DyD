@@ -4,9 +4,11 @@ export interface Product {
   images: string[];
   inStock: number;
   price: number;
+  priceInOffer: number;
   slug: string;
   tags: string[];
   title: string;
+  position: number;
   //Todo: type: Type;
 };
 

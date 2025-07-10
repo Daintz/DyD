@@ -58,7 +58,7 @@ export const AnimateMoveLeft = ({ images }: Props) => {
         }
 
         .animate-marquee {
-          animation: marquee 30s linear infinite;
+          animation: marquee 20s linear infinite;
           will-change: transform;
         }
       `}</style>

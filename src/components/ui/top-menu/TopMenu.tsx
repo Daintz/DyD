@@ -26,7 +26,7 @@ export const TopMenu = () => {
   }, []);
 
   return (
-    <nav className="flex px-5 justify-between items-center w-full">
+    <nav className="fixed top-0 left-0 right-0 z-50 flex px-5 justify-between items-center w-full bg-palet-black">
 
       {/* Logo */}
       <div>

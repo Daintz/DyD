@@ -1,5 +1,6 @@
 // Components
 import { Footer, Sidebar, TopMenu } from "@/components";
+import { Notification } from "@/components/ui/notification/Notification";
 
 export default function ShopLayout({ children }: {
   children: React.ReactNode;
