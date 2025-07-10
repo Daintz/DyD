@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "prisma:deploy": "npx prisma migrate deploy && prisma generate",
-    "seed": "ts-node src/seed/seed-database.ts"
+    "seed": "ts-node src/seed/seed-database.ts",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.1.1",
@@ -42,5 +43,5 @@
     "tailwindcss": "^4.1.8",
     "ts-node": "^10.9.2",
     "typescript": "^5"
-  }
+  },
 }
