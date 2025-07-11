@@ -1,4 +1,4 @@
-import { PrismaClient } from "../generated/prisma";
+import { PrismaClient } from "@prisma/client";
 
 // Seed
 import { initialData } from "./seed";
@@ -30,7 +30,7 @@ async function main() {
 
   const categoriesDB = await prisma.category.findMany();
 
-  const categoriesMap = categoriesDB.reduce((map, category) => {
+  const categoriesMap = categoriesDB.reduce((map: any, category: any) => {
     map[category.name.toLowerCase()] = category.id;
     return map;
   }, {} as Record<string, string>);
