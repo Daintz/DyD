@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
 
   const msg = {
     to,
-    from: "",
+    from: "ddproductostecnologicos@gmail.com",
     subject,
     html
   };
