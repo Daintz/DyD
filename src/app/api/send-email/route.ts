@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
 
   const msg = {
     to,
-    from: process.env.EMAIL_FROM!,
+    from: "",
     subject,
     html
   };
