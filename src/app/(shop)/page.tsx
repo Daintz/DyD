@@ -80,9 +80,9 @@ export default async function Home({ searchParams }: Props) {
           className="mb-2"
         /> */}
 
-        <ProductGrid
+        {/* <ProductGrid
           products={products}
-        />
+        /> */}
       </div>
 
       <Notification timeout={5000}/>
