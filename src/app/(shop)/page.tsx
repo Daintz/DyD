@@ -47,27 +47,27 @@ export default async function Home({ searchParams }: Props) {
             images={[
               {
                 key: "1",
-                src: "https://res.cloudinary.com/dtttwxbgr/image/upload/v1751687640/AUDIFONOS_DE_SEGUNDA_GENERACI%C3%93N_P%C3%81GINA_3125x3125px_aus9ts.png",
+                src: "https://res.cloudinary.com/dtttwxbgr/image/upload/v1752347437/AUDIFONOS_DE_SEGUNDA_GENERACI%C3%93N_P%C3%81GINA_3125x3125px_tqwimd.webp",
                 alt: "AIRPODS DE PRIMERA GENERACIÓN"
               },
               {
                 key: "2",
-                src: "https://res.cloudinary.com/dtttwxbgr/image/upload/v1751687351/AUDIFONOS_PRO_DE_SEGUNDA_GENERACI%C3%93N_P%C3%81GINA_3125x3125px_pbpq10.png",
-                alt: "AIRPODS DE SEGUNDA GENERACIÓN"
+                src: "https://res.cloudinary.com/dtttwxbgr/image/upload/v1752347310/AUDIFONOS_PRO_DE_SEGUNDA_GENERACI%C3%93N_P%C3%81GINA_3125x3125px_icxtgd.webp",
+                alt: "AIRPODS PRO DE SEGUNDA GENERACIÓN"
               },
               {
                 key: "3",
-                src: "https://res.cloudinary.com/dtttwxbgr/image/upload/v1751687617/AUDIFONOS_PRO_DE_SEGUNDA_GENERACI%C3%93N_CON_PANTALLA_P%C3%81GINA_3125x3125px_dr9hkx.png",
+                src: "https://res.cloudinary.com/dtttwxbgr/image/upload/v1752347438/AUDIFONOS_PRO_DE_SEGUNDA_GENERACI%C3%93N_CON_PANTALLA_P%C3%81GINA_3125x3125px_shdrff.webp",
                 alt: "AIRPODS DE SEGUNDA GENERACIÓN CON PANTALLA"
               },
               {
                 key: "4",
-                src: "https://res.cloudinary.com/dtttwxbgr/image/upload/v1751687348/AUDIFONOS_DE_TERCERA_GENERACI%C3%93N_P%C3%81GINA_3125x3125px_s2i0ja.png",
+                src: "https://res.cloudinary.com/dtttwxbgr/image/upload/v1752347437/AUDIFONOS_DE_TERCERA_GENERACI%C3%93N_P%C3%81GINA_3125x3125px_gje39g.webp",
                 alt: "AIRPODS DE TERCERA GENERACIÓN"
               },
               {
                 key: "5",
-                src: "https://res.cloudinary.com/dtttwxbgr/image/upload/v1751687348/AUDIFONOS_DE_CUARTA_GENERACI%C3%93N_P%C3%81GINA_3125x3125px_i3bddh.png",
+                src: "https://res.cloudinary.com/dtttwxbgr/image/upload/v1752347437/AUDIFONOS_DE_CUARTA_GENERACI%C3%93N_P%C3%81GINA_3125x3125px_adnizl.webp",
                 alt: "AIRPODS DE CUARTA GENERACIÓN"
               },
             ]}
