@@ -11,7 +11,7 @@ import { Notification } from "@/components/ui/notification/Notification";
 import { getPaginatedProductsWithImages } from "@/actions";
 
 // Components
-import { MainSection, ProductGrid, TitleCenter } from "@/components";
+import { MainSection, ProductGrid, Title, TitleCenter } from "@/components";
 
 interface Props {
   searchParams?: Promise<{
@@ -74,15 +74,15 @@ export default async function Home({ searchParams }: Props) {
           />
         </div>
 
-        {/* <Title
+        <Title
           title="Productos"
           subtitle="Todos los productos"
           className="mb-2"
         />
 
-        {/* <ProductGrid
+        <ProductGrid
           products={products}
-        /> */}
+        />
       </div>
 
       <Notification timeout={5000}/>
