@@ -72,7 +72,7 @@ export default async function Home({ searchParams }: Props) {
               },
             ]}
           />
-        </div> */}
+        </div>
 
         {/* <Title
           title="Productos"
