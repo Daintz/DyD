@@ -14,21 +14,11 @@ interface Props {
 }
 
 export const AnimateMoveLeft = ({ images }: Props) => {
-  const marqueeRef = useRef<HTMLDivElement>(null);
-  const allImages = [...images, ...images, ...images];
-
-  useEffect(() => {
-    if (marqueeRef.current) {
-      marqueeRef.current.style.animation = "none";
-      void marqueeRef.current.offsetWidth;
-      marqueeRef.current.style.animation = "";
-    }
-  }, [images]);
+  const allImages = [...images, ...images];
 
   return (
     <div className="relative overflow-hidden w-full py-6 group">
       <div
-        ref={marqueeRef}
         className="flex animate-marquee gap-6 w-max group-hover:[animation-play-state:paused]"
         style={{
           animationDuration: "20s",
@@ -39,8 +29,9 @@ export const AnimateMoveLeft = ({ images }: Props) => {
             key={`${item.key}-${idx}`}
             src={item.src}
             alt={item.alt}
-            width={100}
-            height={100}
+            width={0}
+            height={0}
+            sizes="120px"
             className="w-[120px] h-[120px] object-contain flex-shrink-0"
             loading="lazy"
           />
