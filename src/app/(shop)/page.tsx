@@ -74,12 +74,6 @@ export default async function Home({ searchParams }: Props) {
           />
         </div>
 
-        <Title
-          title="Productos"
-          subtitle="Todos los productos"
-          className="mb-2"
-        />
-
         <ProductGrid
           products={products}
         />

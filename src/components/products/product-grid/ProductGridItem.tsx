@@ -29,8 +29,9 @@ export const ProductGridItem = ({ product }: Props) => {
           src={displayImage}
           alt={product.title}
           className="w-full overflow-hidden rounded h-50 object-cover"
-          width={2000}
-          height={2000}
+          width={800}
+          height={800}
+          loading="lazy"
           onMouseEnter={() => setDisplayImage(product.images[1])}
           onMouseLeave={() => setDisplayImage(product.images[0])}
         />
