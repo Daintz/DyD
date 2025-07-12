@@ -40,7 +40,7 @@ export default async function Home({ searchParams }: Props) {
           className="mb-2"
         />
 
-        <div
+        {/* <div
           className="mb-25"
         >
           <AnimateMoveLeft
@@ -72,7 +72,7 @@ export default async function Home({ searchParams }: Props) {
               },
             ]}
           />
-        </div>
+        </div> */}
 
         {/* <Title
           title="Productos"
