@@ -22,7 +22,8 @@ export const getPaginatedProductsWithImages = async ({
         ProductImage: {
           take: 2,
           select: {
-            url: true
+            url: true,
+            position: true,
           }
         }
       }
@@ -36,7 +37,7 @@ export const getPaginatedProductsWithImages = async ({
       totalPages: totalPages,
       products: products.map(product => ({
         ...product,
-        images: product.ProductImage.map(image => image.url)
+        images: product.ProductImage.sort((a, b) => b.position - a.position).map(image => image.url)
       })).sort((a, b) => a.position - b.position)
     };
   } catch (err) {

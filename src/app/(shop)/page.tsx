@@ -78,7 +78,7 @@ export default async function Home({ searchParams }: Props) {
           products={products}
         />
       </div>
-
+sx
       <Notification timeout={5000}/>
     </div>
   );
