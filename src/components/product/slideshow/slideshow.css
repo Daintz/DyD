@@ -1,5 +1,4 @@
 .swiper-slide {
-  
   /* Center slide text vertically */
   display: flex;
 }
@@ -11,12 +10,9 @@
   object-fit: cover;
 }
 
-
 .swiper {
-  width: 100%;
-  height: 900px;
-  margin-left: auto;
-  margin-right: auto;
+  width: 50%;
+  height: 700px;
 }
 
 .swiper-slide {
