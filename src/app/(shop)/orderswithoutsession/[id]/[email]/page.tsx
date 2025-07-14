@@ -1,29 +1,48 @@
 import Image from "next/image";
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 // Actions
-import { getOrderById } from "@/actions";
+import { getOrderByIdWithoutSession } from "@/actions";
+
+// Store
+import { useAddressWithoutSessionStore } from "@/store";
 
 // Components
 import { Title } from "@/components";
-import { ButtonPaid } from "./ui/ButtonPaid";
 
 // Utils
 import { formatToCOP } from "@/utils";
+import { ButtonPaid } from "../ui/ButtonPaid";
 
 interface Params {
   id: string;
+  email: string;
 };
 interface Props {
   params: Promise<Params>
 };
 
-export default async function OrderPage({ params }: Props) {
-  const { id } = await params;
+export default async function OrderWithoutSessionPage({ params }: Props) {
+  const { id, email } = await params;
 
-  const { ok, orderById} = await getOrderById(id);
+  // const headersList = await headers();
+  // const fullUrl = headersList.get("x-url") || "";
+  // const email = new URL(fullUrl, "http://localhost").searchParams.get("email");
+
+  // if (!email) {
+  //   redirect("/"); // redirige si no viene el email
+  // }
+
+  const { ok, orderById } = await getOrderByIdWithoutSession(id);
 
   if (!ok) redirect("/");
+
+  // const address = useAddressWithoutSessionStore(state => state.address);
+
+  console.log("orderById", orderById);
+  console.log("ok", ok);
+  console.log("email", email);
 
   return (
     <div className="flex justify-center items-center mb-54 px-10 sm:px-0">
@@ -98,7 +117,7 @@ export default async function OrderPage({ params }: Props) {
                 id={orderById!.id}
                 total={orderById!.total}
                 isPaid={orderById!.isPaid}
-                buyerEmail={orderById!.user!.email}
+                buyerEmail={""}
               />
             </div>
           </div>

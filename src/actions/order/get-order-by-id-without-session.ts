@@ -6,13 +6,13 @@ import { auth } from "@/auth-config";
 // Libraries
 import prisma from "@/lib/prisma";
 
-export const getOrderById = async(id: string) => {
+export const getOrderByIdWithoutSession = async(id: string) => {
   const session = await auth();
 
-  if (!session) {
+  if (session) {
     return {
       ok: false,
-      message: "Debe estar autenticado"
+      message: "Tienes una sesión de usuario activa."
     };
   };
 
@@ -22,11 +22,6 @@ export const getOrderById = async(id: string) => {
       include: {
         OrderAddress: {
           where: { orderId: id }
-        },
-        user: {
-          select: {
-            email: true
-          }
         },
         OrderItem: {
           where: { orderId: id },
@@ -51,12 +46,11 @@ export const getOrderById = async(id: string) => {
         },
     });
 
+    console.log(orderById);
     if (!orderById) throw `${id} no existe`;
 
-    if(session.user.role === "user") {
-      if (session.user.id !== orderById?.userId) {
-        throw `${id} no existe`;
-      };
+    if (orderById?.userId) {
+      throw `Es imposible entrar a esta orden con un ID de sesión relacionado ${id}`;
     };
 
     return {

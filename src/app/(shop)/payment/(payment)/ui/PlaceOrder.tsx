@@ -55,19 +55,40 @@ const PlaceOrder = () => {
       },
       body: JSON.stringify({
         to: address.email,
-        subject: "Confirmación de pago - tu pedido GADGETSD&D",
+        subject: "Confirmación para pago - tu pedido GADGETSD&D",
         html: `
-          <h2>¡Hola ${address.firstName}!</h2>
-          <p>Haz hecho un pedido con nosotros <strong>#${resp.order!.id}.</strong></p>
-          <p>Solo hace falta hacer el pago de tú pedido!</p>
-          <p>Total pago: <strong>$${resp.order!.total.toLocaleString()}</strong></p>
-          <p>Gracias por confiar en GADGETSD&D</p>
+          <div style="font-family: Arial, sans-serif; color: #333; max-width: 600px; margin: 0 auto;">
+            <h2 style="color: #FFA500;">Hola, ${address.firstName} 👋</h2>
+
+            <p>Gracias por realizar tu pedido con <strong>GADGETS D&D</strong>. Hemos recibido tu solicitud con el número de pedido <strong>#${resp.order!.id}</strong>.</p>
+
+            <p>A continuación te compartimos los datos que ingresaste en el formulario. Por favor, revísalos cuidadosamente:</p>
+
+            <ul style="line-height: 1.6;">
+              <li><strong>Dirección:</strong> ${address.address}${address?.address2 ? ', ' + address.address2 : ''}</li>
+              <li><strong>Código postal:</strong> ${address.postalCode}</li>
+              <li><strong>Ciudad:</strong> ${address.city}</li>
+              <li><strong>Teléfono:</strong> ${address.phone}</li>
+            </ul>
+
+            <p style="margin-top: 20px;">El total a pagar por tu pedido es de: <strong style="font-size: 1.2em;">$${resp.order!.total.toLocaleString()}</strong></p>
+
+            <p>Si alguno de los datos es incorrecto, por favor vuelve a realizar el pedido ya que este no puede ser modificado por seguridad para asegurarte de que podamos entregarlo correctamente.</p>
+
+            <p style="margin-top: 30px;">Gracias por confiar en nosotros.<br/>El equipo de <strong>GADGETS D&D</strong></p>
+
+            <hr style="margin: 40px 0; border: none; border-top: 1px solid #ccc;" />
+
+            <p style="font-size: 0.85em; color: #888;">
+              Este correo es una confirmación automática. Por favor, no respondas a este mensaje.
+            </p>
+          </div>
         `
       })
     });
 
     clearCart();
-    router.replace("/orders/" + resp.order!.id)
+    router.replace(`/orderswithoutsession/${resp.order!.id}?email=${encodeURIComponent(address.email)}`);
   };
 
   if (!loaded) return null;

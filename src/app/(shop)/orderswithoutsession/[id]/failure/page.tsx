@@ -1,16 +1,19 @@
-import Image from "next/image";
+export const dynamic = "force-dynamic";
+
 import { redirect } from "next/navigation";
+import Image from "next/image";
 
 // Actions
-import { getOrderById } from "@/actions";
+import { getOrderByIdWithoutSession } from "@/actions";
 
 // Components
 import { Title } from "@/components";
-import { ButtonPaid } from "./ui/ButtonPaid";
 
 // Utils
 import { formatToCOP } from "@/utils";
 
+// Icons
+import { IoCardOutline } from "react-icons/io5";
 interface Params {
   id: string;
 };
@@ -18,12 +21,14 @@ interface Props {
   params: Promise<Params>
 };
 
-export default async function OrderPage({ params }: Props) {
+export default async function OrderPendingPage({ params }: Props) {
   const { id } = await params;
 
-  const { ok, orderById} = await getOrderById(id);
+  const { ok, orderById} = await getOrderByIdWithoutSession(id);
 
   if (!ok) redirect("/");
+
+  if (orderById?.isPaid) redirect("/orders");
 
   return (
     <div className="flex justify-center items-center mb-54 px-10 sm:px-0">
@@ -93,13 +98,12 @@ export default async function OrderPage({ params }: Props) {
             </div>
 
             <div className="mt-5 mb-2 w-full">
-              <ButtonPaid
-                title={"Carrito"}
-                id={orderById!.id}
-                total={orderById!.total}
-                isPaid={orderById!.isPaid}
-                buyerEmail={orderById!.user!.email}
-              />
+              <div className="flex items-center rounded-lg py-2 px-3.5 text-xs font-bold text-white mb-5 bg-red-500">
+                <IoCardOutline size={30} />
+                <span className="mx-2">
+                  No pago
+                </span>
+              </div>
             </div>
           </div>
         </div>
