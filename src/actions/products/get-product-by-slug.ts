@@ -8,7 +8,8 @@ export const getProductBySlug = async(slug: string) => {
       include: {
         ProductImage: {
           select: {
-            url: true
+            url: true,
+            position: true,
           }
         }
       },
@@ -21,7 +22,7 @@ export const getProductBySlug = async(slug: string) => {
 
     return {
       ...product,
-      images: product.ProductImage.map(image => image.url)
+      images: product.ProductImage.sort((a, b) => a.position - b.position).map(image => image.url)
     };
   } catch (error) {
     console.log(error);

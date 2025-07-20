@@ -52,10 +52,12 @@ export default async function ProductPage({ params }: Props) {
   const { slug } = await params;
   const product = await getProductBySlug(slug);
 
+  console.log("product.images", product?.images);
+
   if(!product) notFound();
 
   return (
-    <div className="mt-5 mb-20 grid grid-cols-1 md:grid-cols-3 gap-3">
+    <div className="mt-5 mb-20 grid grid-cols-1 md:grid-cols-5 gap-3">
       <div className="col-span-1 md:col-span-2">
         <ProductMobileSlideshow
           title={product.title}
@@ -72,7 +74,7 @@ export default async function ProductPage({ params }: Props) {
 
       <div className="col-span-1 px-5">
         <StockLabel slug={product.slug} />
-        <h1 className={`${inter.className} antialiased font-bold text-xl`}>
+        <h1 className={`${inter.className} antialiased font-bold text-lg`}>
           {product.title}
         </h1>
         <p className="text-lg mb-5">{formatToCOP(product.price)}</p>

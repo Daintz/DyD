@@ -46,7 +46,7 @@ const AddToCart = ({ product }: Props) => {
       />
 
       <button
-        className="btn-primary my-5"
+        className="btn-primary my-5 py-1 px-3 text-[0.79rem]"
         onClick={addToCart}
       >
         Agregar al carrito

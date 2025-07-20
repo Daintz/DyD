@@ -11,15 +11,14 @@
 }
 
 .swiper {
-  width: 50%;
-  height: 700px;
+  width: 70%;
+  height: 550px;
 }
 
 .swiper-slide {
   background-size: cover;
   background-position: center;
 }
-
 
 .mySwiper {
   height: 20%;
@@ -35,11 +34,4 @@
 
 .mySwiper .swiper-slide-thumb-active {
   opacity: 1;
-}
-
-.swiper-slide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
