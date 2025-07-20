@@ -29,7 +29,7 @@ const AddToCart = ({ product }: Props) => {
       title: product.title,
       price: product.price,
       quantity: quantity,
-      image: product.images[0],
+      image: product.images[2],
       inStock: product.inStock
     };
 
