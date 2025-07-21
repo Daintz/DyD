@@ -56,7 +56,8 @@ const AddressForm = ({ userStoredAddress = {} }: Props) => {
   const {
     handleSubmit,
     register,
-    formState: { errors, isValid }, reset
+    formState: { errors, isValid },
+    reset
   } = useForm<FormInputs>({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -92,14 +93,6 @@ const AddressForm = ({ userStoredAddress = {} }: Props) => {
 
     router.push("/checkout");
   };
-
-  useEffect(() => {
-    console.log("errors", errors);
-  }, [errors]);
-
-  useEffect(() => {
-    console.log("errorMessage", errorMessage);
-  }, [errorMessage]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 gap-2 sm:gap-5 sm:grid-cols-2">
@@ -256,7 +249,7 @@ const AddressForm = ({ userStoredAddress = {} }: Props) => {
           <span>Recordar dirección</span>
         </div>
 
-        <div
+        {/* <div
           className="flex h-8 items-end space-x-1"
           aria-live="polite"
           aria-atomic="true"
@@ -265,7 +258,7 @@ const AddressForm = ({ userStoredAddress = {} }: Props) => {
             <IoInformationOutline className="h-5 w-5 text-red-500" />
             <p className="text-sm text-red-500">{errorMessage}</p>
           </If>
-        </div>
+        </div> */}
 
         <button
           // href='/checkout'

@@ -2,12 +2,13 @@
 
 import clsx from "clsx";
 import { useSession } from "next-auth/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { z } from "zod";
 
-// Actions
-import { deleteUserAddress, setUserAddress } from "@/actions";
+// Hook Form
+import { zodResolver } from "@hookform/resolvers/zod";
 
 // Interfaces
 import { Address } from "@/interfaces";
@@ -31,14 +32,33 @@ interface Props {
   userStoredAddress?: Partial<Address>
 };
 
+const schema = z.object({
+  firstName: z.string().min(1, "El nombre es requerido."),
+  lastName: z.string().min(1, "El apellido es requerido."),
+  address: z.string().min(1, "La dirección es requerido."),
+  address2: z.string().max(50, "La dirección 2 es requerido.").optional(),
+  email: z.string().min(1, "El email es requerido."),
+  postalCode: z.string().min(1, "El código postal es requerido."),
+  city: z.string().min(1, "La cuidad es requerido."),
+  phone: z.string().min(1, "El telefono es requerido."),
+  rememberAddress: z.boolean()
+});
+
 const FormWithoutSession = ({ userStoredAddress = {} }: Props) => {
-  const router = useRouter();
-  const { handleSubmit, register, formState: { isValid }, reset } = useForm<FormInputs>({
+  const [errorMessage, setErrorMessage] = useState("");
+  const {
+    handleSubmit,
+    register,
+    formState: { errors, isValid },
+    reset
+  } = useForm<FormInputs>({
+    resolver: zodResolver(schema),
     defaultValues: {
       ...userStoredAddress,
       rememberAddress: false
     },
   });
+  const router = useRouter();
 
   const setAddress = useAddressStore(state => state.setAddress);
   const address = useAddressStore(state => state.address);
@@ -50,6 +70,7 @@ const FormWithoutSession = ({ userStoredAddress = {} }: Props) => {
   }, [address]);
 
   const onSubmit = async(data: FormInputs) => {
+    setErrorMessage("");
     const { rememberAddress, ...restAddress } = data;
     setAddress(data);
 
@@ -62,45 +83,90 @@ const FormWithoutSession = ({ userStoredAddress = {} }: Props) => {
         <span>Nombres</span>
         <input
           type="text"
-          className="p-2 border rounded-md bg-gray-200 text-black"
-          {...register("firstName", {required: true})}
+          className={
+            clsx(
+              "p-2 border rounded-md bg-gray-200 text-black",
+              {
+                "border-red-500": errors.firstName
+              }
+            )
+          }
+          {...register("firstName")}
         />
+
+        <p className="text-red-500">{errors.firstName?.message}</p>
       </div>
 
       <div className="flex flex-col mb-2">
         <span>Apellidos</span>
         <input
           type="text"
-          className="p-2 border rounded-md bg-gray-200 text-black"
-          {...register("lastName", {required: true})}
+          className={
+            clsx(
+              "p-2 border rounded-md bg-gray-200 text-black",
+              {
+                "border-red-500": errors.firstName
+              }
+            )
+          }
+          {...register("lastName")}
         />
+
+        <p className="text-red-500">{errors.lastName?.message}</p>
       </div>
 
       <div className="flex flex-col mb-2">
         <span>Correo electronico</span>
         <input
           type="email"
-          className="p-2 border rounded-md bg-gray-200 text-black"
-          {...register("email", {required: true})}
+          className={
+            clsx(
+              "p-2 border rounded-md bg-gray-200 text-black",
+              {
+                "border-red-500": errors.firstName
+              }
+            )
+          }
+          {...register("email")}
         />
+
+        <p className="text-red-500">{errors.email?.message}</p>
       </div>
 
       <div className="flex flex-col mb-2">
         <span>Dirección</span>
         <input
           type="text"
-          className="p-2 border rounded-md bg-gray-200 text-black"
-          {...register("address", {required: true})}
+          className={
+            clsx(
+              "p-2 border rounded-md bg-gray-200 text-black",
+              {
+                "border-red-500": errors.firstName
+              }
+            )
+          }
+          {...register("address")}
         />
+
+        <p className="text-red-500">{errors.address?.message}</p>
       </div>
 
       <div className="flex flex-col mb-2">
         <span>Dirección 2 (opcional)</span>
         <input
           type="text"
-          className="p-2 border rounded-md bg-gray-200 text-black"
+          className={
+            clsx(
+              "p-2 border rounded-md bg-gray-200 text-black",
+              {
+                "border-red-500": errors.firstName
+              }
+            )
+          }
           {...register("address2")}
         />
+
+        <p className="text-red-500">{errors.address2?.message}</p>
       </div>
 
 
@@ -108,27 +174,54 @@ const FormWithoutSession = ({ userStoredAddress = {} }: Props) => {
         <span>Código postal</span>
         <input
           type="text"
-          className="p-2 border rounded-md bg-gray-200 text-black"
-          {...register("postalCode", {required: true})}
+          className={
+            clsx(
+              "p-2 border rounded-md bg-gray-200 text-black",
+              {
+                "border-red-500": errors.firstName
+              }
+            )
+          }
+          {...register("postalCode")}
         />
+
+        <p className="text-red-500">{errors.postalCode?.message}</p>
       </div>
 
       <div className="flex flex-col mb-2">
         <span>Ciudad</span>
         <input
           type="text"
-          className="p-2 border rounded-md bg-gray-200 text-black"
-          {...register("city", {required: true})}
+          className={
+            clsx(
+              "p-2 border rounded-md bg-gray-200 text-black",
+              {
+                "border-red-500": errors.firstName
+              }
+            )
+          }
+          {...register("city")}
         />
+
+        <p className="text-red-500">{errors.city?.message}</p>
       </div>
 
       <div className="flex flex-col mb-2">
         <span>Teléfono</span>
         <input
           type="text"
-          className="p-2 border rounded-md bg-gray-200 text-black"
-          {...register("phone", {required: true})}
+          className={
+            clsx(
+              "p-2 border rounded-md bg-gray-200 text-black",
+              {
+                "border-red-500": errors.firstName
+              }
+            )
+          }
+          {...register("phone")}
         />
+
+        <p className="text-red-500">{errors.phone?.message}</p>
       </div>
 
       <div className="flex flex-col mb-2 sm:mt-1">
@@ -166,9 +259,6 @@ const FormWithoutSession = ({ userStoredAddress = {} }: Props) => {
         </div>
 
         <button
-          disabled={!isValid}
-          // href='/checkout'
-          // className="btn-primary flex w-full sm:w-1/2 justify-center"
           className={
             clsx({
               "btn-primary": isValid,
