@@ -4,6 +4,8 @@ import { useState } from "react";
 
 // Components
 import { QuantitySelector } from "@/components";
+import { ViewerCount } from "./ViewerCount";
+import { StarRating } from "./StarRating";
 
 // Interfaces
 import { CartProduct, Product } from "@/interfaces";
@@ -19,8 +21,6 @@ const AddToCart = ({ product }: Props) => {
   const addProductToCar = useCartStore(state => state.addProductToCart);
 
   const [quantity, setQuantity] = useState<number>(1);
-
-  console.log("product", product);
 
   const addToCart = () => {
     const cartProduct: CartProduct = {
@@ -39,6 +39,9 @@ const AddToCart = ({ product }: Props) => {
 
   return (
     <>
+      <StarRating value={4.8} totalRatings={18} readOnly />
+      <ViewerCount min={3} max={8} refreshMs={15000} />
+
       <QuantitySelector
         quantity={quantity}
         onQuantityChanged={setQuantity}

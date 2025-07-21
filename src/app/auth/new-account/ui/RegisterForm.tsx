@@ -57,10 +57,6 @@ const RegisterForm = () => {
     window.location.replace("/");
   };
 
-  useEffect(() => {
-    console.log("errors", errors);
-  }, [errors]);
-
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
       <label htmlFor="name">Nombre completo</label>
