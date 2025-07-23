@@ -1,12 +1,10 @@
-import * as React from "react";
+import { FC, useCallback, useEffect, useState } from "react";
+
 
 export interface ViewerCountProps {
-  /** Si lo pasas, se usa tal cual (controlado). */
   count?: number;
-  /** Si no pasas count, se genera un número aleatorio en este rango. */
   min?: number;
   max?: number;
-  /** Intervalo en ms para regenerar el número (solo modo no-controlado). Pasa null/0 para desactivar. */
   refreshMs?: number;
   /** Texto personalizado (singular) – por defecto "Persona". */
   singularText?: string;
@@ -18,9 +16,9 @@ export interface ViewerCountProps {
   className?: string;
   /** Clase extra para el ícono. */
   iconClassName?: string;
-}
+};
 
-export const ViewerCount: React.FC<ViewerCountProps> = ({
+export const ViewerCount: FC<ViewerCountProps> = ({
   count,
   min = 5,
   max = 25,
@@ -33,22 +31,22 @@ export const ViewerCount: React.FC<ViewerCountProps> = ({
 }) => {
   const uncontrolled = count === undefined;
 
-  const randomInRange = React.useCallback(
+  const randomInRange = useCallback(
     () => Math.floor(Math.random() * (max - min + 1)) + min,
     [min, max]
   );
 
-  const [internalCount, setInternalCount] = React.useState<number>(() =>
+  const [internalCount, setInternalCount] = useState<number>(() =>
     uncontrolled ? randomInRange() : count!
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!uncontrolled && typeof count === "number") {
       setInternalCount(count);
     }
   }, [uncontrolled, count]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!uncontrolled && refreshMs) return;
     if (!refreshMs) return;
     const id = setInterval(() => {
@@ -86,7 +84,7 @@ export const ViewerCount: React.FC<ViewerCountProps> = ({
   );
 };
 
-const EyeIcon: React.FC<React.SVGProps<SVGSVGElement>> = ({
+const EyeIcon: FC<React.SVGProps<SVGSVGElement>> = ({
   className,
   ...rest
 }) => (
@@ -103,4 +101,4 @@ const EyeIcon: React.FC<React.SVGProps<SVGSVGElement>> = ({
     <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12Z" />
     <circle cx="12" cy="12" r="3" />
   </svg>
-);1
+);

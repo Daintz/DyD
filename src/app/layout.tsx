@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     siteName: "D&D | Gadgets",
     images: [
       {
-        url: "./favicon.ico",
+        url: "https://gadgetsdyd.com/favicon.ico",
         width: 800,
         height: 600,
         alt: "Logo D&D Gadgets"
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "D&D | Gadgets",
     description: "Los mejores accesorios para el día a día aquí.",
-    images: ["./favicon.ico"]
+    images: ["https://gadgetsdyd.com/favicon.ico"]
   },
   authors: [
     { name: "D&D Gadgets", url: process.env.MERCADOPAGO_NOTIFICATION_URL }
