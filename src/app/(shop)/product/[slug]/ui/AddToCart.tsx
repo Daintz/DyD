@@ -37,7 +37,6 @@ const AddToCart = ({ product }: Props) => {
     };
 
     addProductToCar(cartProduct);
-    setQuantity(1);
 
     // 🔹 Evento de Meta Pixel
     fbq("track", "AddToCart", {
@@ -48,6 +47,8 @@ const AddToCart = ({ product }: Props) => {
       currency: "COP",
       quantity: quantity,
     });
+
+    setQuantity(1);
   };
 
   return (
