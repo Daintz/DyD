@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     siteName: "D&D | Gadgets",
     images: [
       {
-        url: "https://gadgetsdyd.com/images/favicon.ico",
+        url: "./favicon.ico",
         width: 800,
         height: 600,
         alt: "Logo D&D Gadgets"
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "D&D | Gadgets",
     description: "Los mejores accesorios para el día a día aquí.",
-    images: ["https://gadgetsdyd.com/images/favicon.ico"]
+    images: ["./favicon.ico"]
   },
   authors: [
     { name: "D&D Gadgets", url: process.env.MERCADOPAGO_NOTIFICATION_URL }
@@ -56,6 +56,9 @@ export const metadata: Metadata = {
   category: "ecommerce",
   applicationName: "D&D Gadgets",
   generator: "Next.js 14",
+  other: {
+    "facebook-domain-verification": "ewsdpsyyjrp2g5k03di6pbhs9z9vl2"
+  }
 };
 
 export default function RootLayout({
