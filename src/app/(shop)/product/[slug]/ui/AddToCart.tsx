@@ -13,6 +13,9 @@ import { CartProduct, Product } from "@/interfaces";
 // Store
 import { useCartStore } from "@/store";
 
+// Utils
+import { fbq } from "@/utils/fbpixel";
+
 interface Props {
   product: Product;
 };
@@ -35,6 +38,16 @@ const AddToCart = ({ product }: Props) => {
 
     addProductToCar(cartProduct);
     setQuantity(1);
+
+    // 🔹 Evento de Meta Pixel
+    fbq("track", "AddToCart", {
+      content_ids: [product.id],
+      content_name: product.title,
+      content_type: "product",
+      value: product.price * quantity,
+      currency: "COP",
+      quantity: quantity,
+    });
   };
 
   return (
