@@ -3,20 +3,13 @@ import { auth } from '@/auth-config';
 // Components
 import { Title } from '@/components';
 import AddressForm from './ui/AddressForm';
+import { AddressTracker } from './ui/AddressTracker';
 
 // Actions
 import { getUserAddress } from '@/actions';
 
 export default async function AddressPage() {
   const session = await auth();
-
-  (window as any).gtag?.("event", "begin_checkout", {
-    currency: "COP",
-  });
-
-  window.fbq?.("track", "InitiateCheckout", {
-    currency: "COP",
-  });
 
   if (!session?.user) {
     return (
@@ -31,6 +24,8 @@ export default async function AddressPage() {
       <div className="w-full  xl:w-[1000px] flex flex-col justify-center text-left">
         <Title title="Dirección" subtitle="Dirección de entrega" />
         <AddressForm userStoredAddress={userAddress}/>
+
+        <AddressTracker />
       </div>
     </div>
   );
