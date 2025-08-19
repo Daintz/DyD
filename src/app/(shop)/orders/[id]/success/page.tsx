@@ -35,6 +35,14 @@ export default async function OrderSuccessPage({ params }: Props) {
 
   if (!orderById?.isPaid) redirect("/orders");
 
+  (window as any).gtag?.("event", "purchase", {
+    currency: "COP",
+  });
+
+  window.fbq?.("track", "Purchase", {
+    currency: "COP",
+  });
+
   return (
     <div className="flex justify-center items-center mb-54 px-10 sm:px-0">
       <div className="flex flex-col w-[1000px]">

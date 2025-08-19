@@ -10,6 +10,14 @@ import { getUserAddress } from '@/actions';
 export default async function AddressPage() {
   const session = await auth();
 
+  (window as any).gtag?.("event", "begin_checkout", {
+    currency: "COP",
+  });
+
+  window.fbq?.("track", "InitiateCheckout", {
+    currency: "COP",
+  });
+
   if (!session?.user) {
     return (
       <h3 className="text-5xl">500 - No hay sesión de usuario</h3>

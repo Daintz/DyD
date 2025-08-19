@@ -38,7 +38,22 @@ const AddToCart = ({ product }: Props) => {
 
     addProductToCar(cartProduct);
 
-    // 🔹 Evento de Meta Pixel
+    // 🔹 Google Analytics 4
+    (window as any).gtag?.("event", "add_to_cart", {
+      currency: "COP",
+      value: product.price * quantity,
+      items: [
+        {
+          item_id: product.id,
+          item_name: product.title,
+          item_brand: "Mi Marca",
+          price: product.price,
+          quantity: quantity,
+        },
+      ],
+    });
+
+    // 🔹 Meta Pixel
     fbq("track", "AddToCart", {
       content_ids: [product.id],
       content_name: product.title,

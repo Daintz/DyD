@@ -9,6 +9,7 @@ import { getProductBySlug } from "@/actions";
 // Components
 import { ProductMobileSlideshow, ProductSlideshow } from "@/components";
 import StockLabel from "@/components/product/stock-label/StockLabel";
+import { ProductViewTracker } from "./ui/ProductViewTracker";
 import AddToCart from "./ui/AddToCart";
 
 // Fonts
@@ -58,6 +59,8 @@ export default async function ProductPage({ params }: Props) {
 
   return (
     <div className="mt-5 mb-20 grid grid-cols-1 md:grid-cols-5 gap-3">
+      <ProductViewTracker product={product} />
+
       <div className="col-span-1 md:col-span-2">
         <ProductMobileSlideshow
           title={product.title}
