@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC, useState } from "react";
 
 interface StarRatingProps {
   value?: number; // Promedio de calificación
@@ -11,7 +11,7 @@ interface StarRatingProps {
   showCount?: boolean;   // 👈 Nuevo: activar/desactivar el contador
 }
 
-export const StarRating: React.FC<StarRatingProps> = ({
+export const StarRating: FC<StarRatingProps> = ({
   value = 0,
   max = 5,
   onChange,
@@ -21,7 +21,10 @@ export const StarRating: React.FC<StarRatingProps> = ({
   totalRatings = 0,
   showCount = true,
 }) => {
-  const [hover, setHover] = React.useState<number | null>(null);
+  const [hover, setHover] = useState<number | null>(null);
+  const [selectedRating, setSelectedRating] = useState<number | null>(null);
+  const [showModal, setShowModal] = useState(false);
+  const [comment, setComment] = useState("");
 
   const handleClick = (index: number) => {
     if (readOnly || !onChange) return;
