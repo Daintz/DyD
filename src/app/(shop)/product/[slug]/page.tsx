@@ -1,6 +1,6 @@
 export const revalidate = 604800;
 
-import { Metadata, ResolvingMetadata } from "next";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 // Actions
@@ -17,6 +17,7 @@ import { inter } from "@/config/fonts";
 
 // Utils
 import { formatToCOP } from "@/utils";
+import Image from "next/image";
 
 interface Params {
   slug: string
@@ -53,8 +54,6 @@ export default async function ProductPage({ params }: Props) {
   const { slug } = await params;
   const product = await getProductBySlug(slug);
 
-  console.log("product.images", product?.images);
-
   if(!product) notFound();
 
   return (
@@ -75,19 +74,37 @@ export default async function ProductPage({ params }: Props) {
         />
       </div>
 
-      <div className="col-span-2 px-5">
+      <div className="col-span-3 px-5 bg-gray-400">
         <StockLabel slug={product.slug} />
         <h1 className={`${inter.className} antialiased font-bold text-lg`}>
           {product.title}
         </h1>
-        <p className="text-lg mb-5">{formatToCOP(product.price)}</p>
+
+        <div className="flex items-center gap-2 mb-5">
+          {/* Precio actual */}
+          <span className="text-palet-orange font-bold text-lg">
+            {formatToCOP(product.price)}
+          </span>
+          {/* Precio anterior tachado */}
+          <span className="text-gray-500 line-through text-md">
+            {formatToCOP(product.priceInOffer)}
+          </span>
+        </div>
 
         <AddToCart product={product}/>
+      </div>
 
-        <h3 className="font-bold text-sm">Descripción</h3>
-        <p className="font-light">
-          {product.description}
-        </p>
+      <div className="col-span-6 px-25 mt-5">
+        <h3 className="font-bold text-sm">Descripción </h3>
+        {/* {product.descriptionImages.map((image) => (
+          <Image
+            src={image}
+            width={2000}
+            height={2000}
+            alt={product.title}
+            className="mr-5 rounded"
+          />
+        ))} */}
       </div>
     </div>
   );

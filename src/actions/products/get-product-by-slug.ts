@@ -14,7 +14,7 @@ export const getProductBySlug = async(slug: string) => {
         }
       },
       where: {
-        slug: slug
+        slug: slug,
       }
     });
 

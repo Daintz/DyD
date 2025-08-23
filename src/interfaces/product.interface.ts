@@ -9,6 +9,7 @@ export interface Product {
   tags: string[];
   title: string;
   position: number;
+  contentId: string;
   //Todo: type: Type;
 };
 
@@ -20,6 +21,7 @@ export interface CartProduct {
   quantity: number;
   image: string;
   inStock: number;
+  contentId: string;
 };
 
 export type Type = "apple" | "airpods" | "headphones" | "covers" | "chargers" | "portable chargers"

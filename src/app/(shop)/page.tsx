@@ -76,6 +76,33 @@ export default async function Home({ searchParams }: Props) {
 
         <ProductGrid
           products={products}
+          tag="airpods"
+        />
+      </div>
+
+      <div className="px-0 sm:px-10 mt-10">
+        <TitleCenter
+          title="Apple Watch"
+          subtitle="Conoce todos los Apple Watch."
+          className="mb-2"
+        />
+
+        <ProductGrid
+          products={products}
+          tag="applewatch"
+        />
+      </div>
+
+      <div className="px-0 sm:px-10 mt-10">
+        <TitleCenter
+          title="Samsung Galaxy Buds"
+          subtitle="Conoce todos los Samsung Galaxy Buds."
+          className="mb-2"
+        />
+
+        <ProductGrid
+          products={products}
+          tag="galaxybuds"
         />
       </div>
 

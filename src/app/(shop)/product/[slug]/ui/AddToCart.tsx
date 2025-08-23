@@ -1,5 +1,6 @@
 "use client";
 
+import crypto from "crypto";
 import { useState } from "react";
 
 // Components
@@ -20,12 +21,18 @@ interface Props {
   product: Product;
 };
 
+function getCookie(name: string) {
+  if (typeof document === "undefined") return undefined;
+  const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
+  return match ? decodeURIComponent(match[2]) : undefined;
+}
+
 const AddToCart = ({ product }: Props) => {
   const addProductToCar = useCartStore(state => state.addProductToCart);
 
   const [quantity, setQuantity] = useState<number>(1);
 
-  const addToCart = () => {
+  const addToCart = async () => {
     const cartProduct: CartProduct = {
       id: product.id,
       slug: product.slug,
@@ -33,10 +40,14 @@ const AddToCart = ({ product }: Props) => {
       price: product.price,
       quantity: quantity,
       image: product.images[2],
+      contentId: product.contentId,
       inStock: product.inStock
     };
 
     addProductToCar(cartProduct);
+
+    const eventId = crypto.randomUUID();
+  const url = window.location.href;
 
     // 🔹 Google Analytics 4
     (window as any).gtag?.("event", "add_to_cart", {
@@ -61,6 +72,27 @@ const AddToCart = ({ product }: Props) => {
       value: product.price * quantity,
       currency: "COP",
       quantity: quantity,
+    }, {eventID: eventId});
+
+    // 🔹 CAPI (servidor)
+    await fetch("/api/meta/events", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        event_name: "AddToCart",
+        event_id: eventId, // 👈 mismo ID que arriba
+        event_source_url: url,
+        custom_data: {
+          value: product.price * quantity,
+          currency: "COP",
+          content_type: "product",
+          content_ids: [product.contentId],
+          quantity,
+        },
+        fbp: getCookie("_fbp"),
+        fbc: getCookie("_fbc"),
+        // opcional: email, phone, external_id si el usuario está logueado
+      }),
     });
 
     setQuantity(1);

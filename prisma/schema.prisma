@@ -27,15 +27,17 @@ model Category {
 }
 
 model Product {
-  id           String   @id @default(uuid())
-  title        String
-  description  String
-  inStock      Int
-  price        Float    @default(0)
-  priceInOffer Float    @default(0)
-  slug         String   @unique
-  tags         String[] @default([])
-  position     Int
+  id                String   @id @default(uuid())
+  title             String
+  description       String
+  descriptionImages String[] @default([])
+  inStock           Int
+  price             Float    @default(0)
+  priceInOffer      Float    @default(0)
+  slug              String   @unique
+  tags              String[] @default([])
+  position          Int
+  contentId         String?  @unique
 
   category   Category @relation(fields: [categoryId], references: [id])
   categoryId String
@@ -62,8 +64,8 @@ model ProductRatings {
   product   Product @relation(fields: [productId], references: [id])
   productId String
 
-  user     User     @relation("UserProductRating", fields: [userId], references: [id])
-  userId   String   @unique
+  user   User   @relation("UserProductRating", fields: [userId], references: [id])
+  userId String @unique
 }
 
 model User {

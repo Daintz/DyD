@@ -5,13 +5,19 @@ import { ProductGridItem } from "./ProductGridItem";
 import { Product } from "@/interfaces";
 interface Props {
   products: Product[];
+  tag: string;
 };
 
-export const ProductGrid = ({ products }: Props) => {
+export const ProductGrid = ({ products, tag }: Props) => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-30 md:gap-30 mb-10">
       {
         [...products]
+          .filter(product =>
+            product.tags.some(t =>
+              t.includes(tag)
+            )
+          )
           .sort((a, b) => a.position - b.position)
           .map(product => (
             <ProductGridItem

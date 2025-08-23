@@ -30,15 +30,23 @@ export const ProductViewTracker = ({ product }: Props) => {
       });
 
       // Meta Pixel (ejemplo)
-      window.fbq?.("track", "ViewContent", {
-        content_ids: [product.id],
-        content_name: product.title,
-        content_type: "product",
-        value: product.price,
-        currency: "COP",
-      });
+      if (typeof window !== "undefined") {
+        if (typeof (window as any).fbq !== "function") {
+          console.warn("⚠️ fbq aún no está disponible");
+          return;
+        }
 
-      console.log("Evento view_item enviado 🚀", product.title);
+        window.fbq("track", "ViewContent", {
+          content_ids: [product.id],
+          content_name: product.title,
+          content_type: "product",
+          value: product.price,
+          currency: "COP",
+        });
+
+        console.log("✅ Evento ViewContent enviado", product.title);
+      }
+
     }
   }, [product]);
 
