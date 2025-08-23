@@ -56,6 +56,8 @@ export default async function ProductPage({ params }: Props) {
 
   if(!product) notFound();
 
+  console.log("product", product);
+
   return (
     <div className="mt-5 mb-20 grid grid-cols-1 md:grid-cols-5 gap-3">
       <ProductViewTracker product={product} />
@@ -74,7 +76,7 @@ export default async function ProductPage({ params }: Props) {
         />
       </div>
 
-      <div className="col-span-3 px-5 bg-gray-400">
+      <div className="col-span-3 px-5">
         <StockLabel slug={product.slug} />
         <h1 className={`${inter.className} antialiased font-bold text-lg`}>
           {product.title}
@@ -98,6 +100,7 @@ export default async function ProductPage({ params }: Props) {
         <h3 className="font-bold text-sm">Descripción </h3>
         {product?.descriptionImages.map((image) => (
           <Image
+            key={image}
             src={image}
             width={2000}
             height={2000}

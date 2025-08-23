@@ -26,8 +26,13 @@ export default async function Home({ searchParams }: Props) {
   const { products } = await getPaginatedProductsWithImages({ page });
 
   if(products.length === 0) {
-    redirect("/");
-  };
+    return (
+      <div className="flex flex-col items-center justify-center h-96">
+        <h2 className="text-2xl font-bold mb-4">No hay productos disponibles</h2>
+        <p className="text-gray-500">Vuelve más tarde o revisa otra categoría.</p>
+      </div>
+    );
+  }
 
   return (
     <div>

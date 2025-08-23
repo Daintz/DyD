@@ -50,6 +50,7 @@ export const initialData: seedData = {
     "Airpods",
     "Headphones",
     "Galaxy Buds",
+    "Watch",
     "Apple Watch",
     "Covers",
     "Chargers",
