@@ -30,7 +30,8 @@ const AddToCart = ({ product }: Props) => {
       price: product.price,
       quantity: quantity,
       image: product.images[0],
-      inStock: product.inStock
+      inStock: product.inStock,
+      contentId: product.contentId
     };
 
     addProductToCar(cartProduct);
