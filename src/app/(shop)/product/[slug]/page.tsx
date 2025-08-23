@@ -96,7 +96,7 @@ export default async function ProductPage({ params }: Props) {
 
       <div className="col-span-6 px-25 mt-5">
         <h3 className="font-bold text-sm">Descripción </h3>
-        {/* {product.descriptionImages.map((image) => (
+        {product?.descriptionImages.map((image) => (
           <Image
             src={image}
             width={2000}
@@ -104,7 +104,7 @@ export default async function ProductPage({ params }: Props) {
             alt={product.title}
             className="mr-5 rounded"
           />
-        ))} */}
+        ))}
       </div>
     </div>
   );
