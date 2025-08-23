@@ -37,6 +37,7 @@ export const getPaginatedProductsWithImages = async ({
       totalPages: totalPages,
       products: products.map(product => ({
         ...product,
+        contentId: product.contentId ?? "",
         images: product.ProductImage.sort((a, b) => a.position - b.position).map(image => image.url)
       })).sort((a, b) => a.position - b.position)
     };

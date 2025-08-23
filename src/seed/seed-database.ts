@@ -37,14 +37,18 @@ async function main() {
   }, {} as Record<string, string>);
 
   products.forEach(async(product) => {
-    const { type, images, ...rest } = product
-
+    const { type, images, descriptionImages, ...rest } = product;
+    const categoryId = categoriesMap[type];
+    if (!categoryId) {
+      console.warn(`No se encontró categoría para el tipo: ${type}, producto omitido.`);
+      return;
+    }
     const dbProduct = await prisma.product.create({
       data: {
         ...rest,
-        categoryId: categoriesMap[type]
+        categoryId
       }
-    })
+    });
 
     const imagesData = images.map((image, index) => ({
       url: image,
