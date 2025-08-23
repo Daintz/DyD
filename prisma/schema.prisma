@@ -37,7 +37,7 @@ model Product {
   slug              String   @unique
   tags              String[] @default([])
   position          Int
-  contentId         String?  @unique
+  contentId         String   @default("") @unique
 
   category   Category @relation(fields: [categoryId], references: [id])
   categoryId String
