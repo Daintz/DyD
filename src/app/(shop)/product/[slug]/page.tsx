@@ -18,6 +18,8 @@ import { inter } from "@/config/fonts";
 // Utils
 import { formatToCOP } from "@/utils";
 import Image from "next/image";
+import { DescriptionProductMobile } from "@/components/product/description/DescriptionProductMobile";
+import { DescriptionProduct } from "@/components/product/description/DescriptionProduct";
 
 interface Params {
   slug: string
@@ -101,16 +103,17 @@ export default async function ProductPage({ params }: Props) {
 
     <div className="col-span-6 md:px-25 mt-5">
       <h3 className="font-bold text-sm">Descripción </h3>
-      {product?.descriptionImages.map((image) => (
-        <Image
-          key={image}
-          src={image}
-          width={2000}
-          height={2000}
-          alt={product.title}
-          className="mr-5 rounded"
-        />
-      ))}
+      <DescriptionProductMobile
+        title={product.title}
+        descriptionImages={product.descriptionImagesMobile}
+        className="block md:hidden"
+      />
+
+      <DescriptionProduct
+        title={product.title}
+        descriptionImages={product.descriptionImages}
+        className="hidden md:block"
+      />
     </div>
     </>
   );

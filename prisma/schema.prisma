@@ -27,17 +27,18 @@ model Category {
 }
 
 model Product {
-  id                String   @id @default(uuid())
-  title             String
-  description       String
-  descriptionImages String[] @default([])
-  inStock           Int
-  price             Float    @default(0)
-  priceInOffer      Float    @default(0)
-  slug              String   @unique
-  tags              String[] @default([])
-  position          Int
-  contentId         String   @default("") @unique
+  id                      String   @id @default(uuid())
+  title                   String
+  description             String
+  descriptionImages       String[] @default([])
+  descriptionImagesMobile String[] @default([])
+  inStock                 Int
+  price                   Float    @default(0)
+  priceInOffer            Float    @default(0)
+  slug                    String   @unique
+  tags                    String[] @default([])
+  position                Int
+  contentId               String   @unique @default("")
 
   category   Category @relation(fields: [categoryId], references: [id])
   categoryId String

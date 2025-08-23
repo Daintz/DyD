@@ -5,6 +5,7 @@ interface SeedProduct {
   description: string;
   images: string[];
   descriptionImages: string[];
+  descriptionImagesMobile: string[];
   inStock: number;
   price: number;
   priceInOffer: number;
@@ -68,6 +69,9 @@ export const initialData: seedData = {
       descriptionImages: [
         "https://res.cloudinary.com/dtttwxbgr/image/upload/v1755971865/PUBLICIDAD_DE_SEGUNDA_GENERACI%C3%93N_1_1800_x_800_px_mongsz.webp"
       ],
+      descriptionImagesMobile: [
+        "https://res.cloudinary.com/dtttwxbgr/image/upload/v1755971865/PUBLICIDAD_DE_SEGUNDA_GENERACI%C3%93N_1_1800_x_800_px_mongsz.webp"
+      ],
       inStock: 5,
       price: 64990,
       priceInOffer: 79990,
@@ -86,6 +90,9 @@ export const initialData: seedData = {
         "https://res.cloudinary.com/dtttwxbgr/image/upload/v1752238817/AUDIFONOS_PRO_DE_SEGUNDA_GENERACI%C3%93N_P%C3%81GINA_2_4800_x_1600px_g574jb.webp"
       ],
       descriptionImages: [
+        "https://res.cloudinary.com/dtttwxbgr/image/upload/v1755879614/META_ADS_PUBLICIDAD_PRO_DE_SEGUNDA_GENERACI%C3%93N_2_1800_x_800_px_pfj4kk.webp"
+      ],
+      descriptionImagesMobile: [
         "https://res.cloudinary.com/dtttwxbgr/image/upload/v1755879614/META_ADS_PUBLICIDAD_PRO_DE_SEGUNDA_GENERACI%C3%93N_2_1800_x_800_px_pfj4kk.webp"
       ],
       inStock: 5,
@@ -108,6 +115,9 @@ export const initialData: seedData = {
       descriptionImages: [
         "https://res.cloudinary.com/dtttwxbgr/image/upload/v1755875531/META_ADS_PUBLICIDAD_TERCERA_GENERACI%C3%93N_2_1800_x_800_px_swxfe7.webp"
       ],
+      descriptionImagesMobile: [
+        "https://res.cloudinary.com/dtttwxbgr/image/upload/v1755982029/PUBLICIDAD_PRO_DE_SEGUNDA_GENERACI%C3%93N_ANC_2_800_x_800_px_sypfav.webp"
+      ],
       inStock: 5,
       price: 89990,
       priceInOffer: 119990,
@@ -126,6 +136,9 @@ export const initialData: seedData = {
         "https://res.cloudinary.com/dtttwxbgr/image/upload/v1751687617/AUDIFONOS_PRO_DE_SEGUNDA_GENERACI%C3%93N_CON_PANTALLA_P%C3%81GINA_3125x3125px_dr9hkx.png"
       ],
       descriptionImages: [
+
+      ],
+      descriptionImagesMobile: [
 
       ],
       inStock: 5,
@@ -148,6 +161,9 @@ export const initialData: seedData = {
       descriptionImages: [
         "https://res.cloudinary.com/dtttwxbgr/image/upload/v1755892053/PUBLICIDAD_TERCERA_GENERACI%C3%93N_1_1800_x_800_px_vhwrk0.webp"
       ],
+      descriptionImagesMobile: [
+        "https://res.cloudinary.com/dtttwxbgr/image/upload/v1755892053/PUBLICIDAD_TERCERA_GENERACI%C3%93N_1_1800_x_800_px_vhwrk0.webp"
+      ],
       inStock: 5,
       price: 79990,
       priceInOffer: 104990,
@@ -166,6 +182,9 @@ export const initialData: seedData = {
         "https://res.cloudinary.com/dtttwxbgr/image/upload/v1751687348/AUDIFONOS_DE_CUARTA_GENERACI%C3%93N_P%C3%81GINA_3125x3125px_i3bddh.png"
       ],
       descriptionImages: [
+        "https://res.cloudinary.com/dtttwxbgr/image/upload/v1755893457/PUBLICIDAD_CUARTA_GENERACI%C3%93N_1_1800_x_800_px_lvnpk9.webp"
+      ],
+      descriptionImagesMobile: [
         "https://res.cloudinary.com/dtttwxbgr/image/upload/v1755893457/PUBLICIDAD_CUARTA_GENERACI%C3%93N_1_1800_x_800_px_lvnpk9.webp"
       ],
       inStock: 5,
@@ -188,6 +207,9 @@ export const initialData: seedData = {
       descriptionImages: [
 
       ],
+      descriptionImagesMobile: [
+
+      ],
       inStock: 5,
       price: 129990,
       priceInOffer: 159990,
@@ -206,6 +228,9 @@ export const initialData: seedData = {
         "https://res.cloudinary.com/dtttwxbgr/image/upload/v1753797406/IMG_3721_igfnio.jpg"
       ],
       descriptionImages: [
+
+      ],
+      descriptionImagesMobile: [
 
       ],
       inStock: 5,
@@ -228,6 +253,9 @@ export const initialData: seedData = {
       descriptionImages: [
 
       ],
+      descriptionImagesMobile: [
+
+      ],
       inStock: 5,
       price: 89990,
       priceInOffer: 119990,
@@ -246,6 +274,9 @@ export const initialData: seedData = {
         "https://res.cloudinary.com/dtttwxbgr/image/upload/v1753798026/IMG_4050_h7rmqc.jpg"
       ],
       descriptionImages: [
+
+      ],
+      descriptionImagesMobile: [
 
       ],
       inStock: 5,
@@ -268,6 +299,9 @@ export const initialData: seedData = {
       descriptionImages: [
 
       ],
+      descriptionImagesMobile: [
+
+      ],
       inStock: 5,
       price: 119990,
       priceInOffer: 169990,
@@ -286,6 +320,9 @@ export const initialData: seedData = {
         "https://res.cloudinary.com/dtttwxbgr/image/upload/v1753798026/IMG_4050_h7rmqc.jpg"
       ],
       descriptionImages: [
+
+      ],
+      descriptionImagesMobile: [
 
       ],
       inStock: 5,
@@ -308,6 +345,9 @@ export const initialData: seedData = {
       descriptionImages: [
 
       ],
+      descriptionImagesMobile: [
+
+      ],
       inStock: 5,
       price: 119990,
       priceInOffer: 169990,
@@ -326,6 +366,9 @@ export const initialData: seedData = {
         "https://res.cloudinary.com/dtttwxbgr/image/upload/v1753798026/IMG_4050_h7rmqc.jpg"
       ],
       descriptionImages: [
+
+      ],
+      descriptionImagesMobile: [
 
       ],
       inStock: 5,
