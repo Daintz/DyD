@@ -59,6 +59,7 @@ export default async function ProductPage({ params }: Props) {
   console.log("product", product);
 
   return (
+    <>
     <div className="mt-5 mb-20 grid grid-cols-1 md:grid-cols-5 gap-3">
       <ProductViewTracker product={product} />
 
@@ -96,19 +97,21 @@ export default async function ProductPage({ params }: Props) {
         <AddToCart product={product}/>
       </div>
 
-      <div className="col-span-6 px-25 mt-5">
-        <h3 className="font-bold text-sm">Descripción </h3>
-        {product?.descriptionImages.map((image) => (
-          <Image
-            key={image}
-            src={image}
-            width={2000}
-            height={2000}
-            alt={product.title}
-            className="mr-5 rounded"
-          />
-        ))}
-      </div>
     </div>
+
+    <div className="col-span-6 md:px-25 mt-5">
+      <h3 className="font-bold text-sm">Descripción </h3>
+      {product?.descriptionImages.map((image) => (
+        <Image
+          key={image}
+          src={image}
+          width={2000}
+          height={2000}
+          alt={product.title}
+          className="mr-5 rounded"
+        />
+      ))}
+    </div>
+    </>
   );
 };
