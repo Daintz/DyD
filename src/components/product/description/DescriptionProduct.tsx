@@ -1,6 +1,9 @@
 'use client';
 
-import Image from "next/image";
+import { MouseEvent, useRef, useState } from "react";
+
+// Components
+import { ZoomImage } from "@/components/images/ZoomImage";
 
 interface Props {
   title: string;
@@ -8,19 +11,11 @@ interface Props {
   className?: string;
 };
 
-export const DescriptionProduct = ({ title, descriptionImages, className }: Props) => {
+export const DescriptionProduct = ({ title, descriptionImages = [], className }: Props) => {
   return (
     <div className={className}>
       {descriptionImages?.map((image) => (
-        <Image
-          key={image}
-          src={image}
-          width={2000}
-          height={2000}
-          alt={title}
-          className="mr-5 rounded"
-          style={{ maxWidth: '100%', height: 'auto' }}
-        />
+        <ZoomImage key={image} src={image} alt={title} width={1800} height={800} className="mr-5" />
       ))}
     </div>
   );

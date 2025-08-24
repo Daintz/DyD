@@ -1,3 +1,5 @@
+
+"use client";
 import { FC, useCallback, useEffect, useState } from "react";
 
 
@@ -31,14 +33,18 @@ export const ViewerCount: FC<ViewerCountProps> = ({
 }) => {
   const uncontrolled = count === undefined;
 
-  const randomInRange = useCallback(
-    () => Math.floor(Math.random() * (max - min + 1)) + min,
-    [min, max]
+  // Always initialize with min for SSR, update on client
+  const [internalCount, setInternalCount] = useState<number>(
+    uncontrolled ? min : count!
   );
 
-  const [internalCount, setInternalCount] = useState<number>(() =>
-    uncontrolled ? randomInRange() : count!
-  );
+  // Only update with random value after mount (client)
+  useEffect(() => {
+    if (uncontrolled) {
+      const randomInRange = () => Math.floor(Math.random() * (max - min + 1)) + min;
+      setInternalCount(randomInRange());
+    }
+  }, [uncontrolled, min, max]);
 
   useEffect(() => {
     if (!uncontrolled && typeof count === "number") {
@@ -49,11 +55,14 @@ export const ViewerCount: FC<ViewerCountProps> = ({
   useEffect(() => {
     if (!uncontrolled && refreshMs) return;
     if (!refreshMs) return;
-    const id = setInterval(() => {
-      setInternalCount(randomInRange());
-    }, refreshMs);
-    return () => clearInterval(id);
-  }, [uncontrolled, refreshMs, randomInRange]);
+    if (uncontrolled) {
+      const randomInRange = () => Math.floor(Math.random() * (max - min + 1)) + min;
+      const id = setInterval(() => {
+        setInternalCount(randomInRange());
+      }, refreshMs);
+      return () => clearInterval(id);
+    }
+  }, [uncontrolled, refreshMs, min, max]);
 
   const c = internalCount;
   const isSingular = c === 1;

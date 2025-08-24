@@ -3,7 +3,6 @@ export const revalidate = 60;
 import { redirect } from "next/navigation";
 
 // Components
-import { ImageBackground } from "@/components/ui/image-background/ImageBackground";
 import { AnimateMoveLeft } from "@/components/ui/animate-move-left/AnimateMoveLeft";
 import { Notification } from "@/components/ui/notification/Notification";
 

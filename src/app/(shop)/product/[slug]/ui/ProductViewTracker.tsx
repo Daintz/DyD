@@ -10,7 +10,7 @@ interface Props {
     price: number;
     images: string[];
   };
-}
+};
 
 export const ProductViewTracker = ({ product }: Props) => {
   useEffect(() => {
@@ -34,7 +34,7 @@ export const ProductViewTracker = ({ product }: Props) => {
         if (typeof (window as any).fbq !== "function") {
           console.warn("⚠️ fbq aún no está disponible");
           return;
-        }
+        };
 
         window.fbq("track", "ViewContent", {
           content_ids: [product.id],
@@ -43,11 +43,9 @@ export const ProductViewTracker = ({ product }: Props) => {
           value: product.price,
           currency: "COP",
         });
+      };
 
-        console.log("✅ Evento ViewContent enviado", product.title);
-      }
-
-    }
+    };
   }, [product]);
 
   return null;

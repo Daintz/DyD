@@ -101,7 +101,7 @@ const AddToCart = ({ product }: Props) => {
   return (
     <>
       <StarRating value={4.8} totalRatings={18} readOnly />
-      <ViewerCount min={3} max={8} refreshMs={15000} />
+      <ViewerCount min={3} max={8} refreshMs={10000} />
 
       <QuantitySelector
         quantity={quantity}

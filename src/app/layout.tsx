@@ -9,6 +9,7 @@ import { inter } from "@/config/fonts";
 
 // Styles
 import "./globals.css";
+import { TitleWatcher } from "@/components/title/TitleWatcher";
 
 export const metadata: Metadata = {
   title: {
@@ -99,6 +100,8 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <Provider>
+          <TitleWatcher />
+
           {children}
         </Provider>
       </body>
