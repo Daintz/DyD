@@ -52,8 +52,11 @@ export const ZoomImage = ({ src, alt, lensSize = 160, zoom = 2, className, width
   const bgW = natural.w * zoom;
   const bgH = natural.h * zoom;
 
-  const bgLeft = pos ? -(pos.x * scaleX * zoom - lensSize / 2) : 0;
-  const bgTop = pos ? -(pos.y * scaleY * zoom - lensSize / 2) : 0;
+  const maxZoom = natural.w / rendered.w;
+  const appliedZoom = Math.min(zoom, maxZoom);
+
+  const bgLeft = pos ? -(pos.x * scaleX * appliedZoom - lensSize / 2) : 0;
+  const bgTop = pos ? -(pos.y * scaleY * appliedZoom - lensSize / 2) : 0;
 
   return (
     <div
@@ -82,13 +85,15 @@ export const ZoomImage = ({ src, alt, lensSize = 160, zoom = 2, className, width
           style={{
             width: lensSize,
             height: lensSize,
-            top: pos.y - lensSize / 2,
-            left: pos.x - lensSize / 2,
+            top: Math.max(lensSize / 2, Math.min(pos.y, rendered.h - lensSize / 2)) - lensSize / 2,
+            left: Math.max(lensSize / 2, Math.min(pos.x, rendered.w - lensSize / 2)) - lensSize / 2,
             backgroundImage: `url(${src})`,
             backgroundRepeat: "no-repeat",
-            backgroundSize: `${bgW}px ${bgH}px`,
-            backgroundPosition: `${bgLeft}px ${bgTop}px`,
-            backdropFilter: "saturate(1.1)"
+            backgroundSize: `${natural.w * appliedZoom}px ${natural.h * appliedZoom}px`,
+            backgroundPosition: `
+              ${-(Math.max(lensSize / 2, Math.min(pos.x, rendered.w - lensSize / 2)) * scaleX * appliedZoom - lensSize / 2)}px
+              ${-(Math.max(lensSize / 2, Math.min(pos.y, rendered.h - lensSize / 2)) * scaleY * appliedZoom - lensSize / 2)}px
+            `,
           }}
         />
       )}
