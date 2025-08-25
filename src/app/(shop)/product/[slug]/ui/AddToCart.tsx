@@ -1,6 +1,5 @@
 "use client";
 
-import crypto from "crypto";
 import { useState } from "react";
 
 // Components
@@ -46,8 +45,23 @@ const AddToCart = ({ product }: Props) => {
 
     addProductToCar(cartProduct);
 
-    const eventId = crypto.randomUUID();
-  const url = window.location.href;
+    function getUUID() {
+      const cryptoObj = typeof window !== "undefined" ? window.crypto : undefined;
+      if (cryptoObj && typeof cryptoObj.randomUUID === "function") {
+        return cryptoObj.randomUUID();
+      }
+      // Fallback for browsers without crypto.randomUUID
+      if (cryptoObj && typeof cryptoObj.getRandomValues === "function") {
+        return ("10000000-1000-4000-8000-100000000000").replace(/[018]/g, c =>
+          (Number(c) ^ cryptoObj.getRandomValues(new Uint8Array(1))[0] & 15 >> (Number(c) / 4)).toString(16)
+        );
+      }
+      // Fallback: simple random string (not a true UUID)
+      return Math.random().toString(36).substring(2, 18);
+    }
+
+    const eventId = getUUID();
+    const url = window.location.href;
 
     // 🔹 Google Analytics 4
     (window as any).gtag?.("event", "add_to_cart", {
