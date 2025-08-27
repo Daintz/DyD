@@ -25,3 +25,4 @@ export * from './ui/title/Title';
 export * from './ui/title-center/TitleCenter';
 export * from './ui/footer/Footer';
 export * from './ui/pagination/Pagination'
+export * from './ui/purchase-popup/PurchasePopup'

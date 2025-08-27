@@ -1,3 +1,5 @@
+"use client";
+
 import React, { FC, useState } from "react";
 
 interface StarRatingProps {
@@ -49,7 +51,7 @@ export const StarRating: FC<StarRatingProps> = ({
       >
         <defs>
           <linearGradient id={`grad-${index}`}>
-            <stop offset={`${fillPercentage}%`} stopColor="#facc15" />
+            <stop offset={`${fillPercentage}%`} stopColor="#FF7043" />
             <stop offset={`${fillPercentage}%`} stopColor="transparent" />
           </linearGradient>
         </defs>
@@ -59,7 +61,7 @@ export const StarRating: FC<StarRatingProps> = ({
                   12 17.77 5.82 21.02
                   7 14.14 2 9.27
                   8.91 8.26 12 2"
-          stroke="#facc15"
+          stroke="#FF7043"
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"

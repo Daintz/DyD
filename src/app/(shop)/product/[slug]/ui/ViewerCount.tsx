@@ -2,7 +2,6 @@
 "use client";
 import { FC, useCallback, useEffect, useState } from "react";
 
-
 export interface ViewerCountProps {
   count?: number;
   min?: number;
