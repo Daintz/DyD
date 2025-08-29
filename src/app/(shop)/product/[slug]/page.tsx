@@ -152,7 +152,7 @@ export default async function ProductPage({ params }: Props) {
         />
       </div>
 
-      {/* <div className="col-span-6 md:px-25 mt-5">
+      <div className="col-span-6 md:px-25 mt-5">
         <h3 className="font-bold text-[1.25rem]">Nuestros clientes también compraron</h3>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
           <ProductCard
@@ -168,7 +168,7 @@ export default async function ProductPage({ params }: Props) {
             product={product}
           />
         </div>
-      </div> */}
+      </div>
 
       {/* <InsersectionObserver product={product} /> */}
     </>
