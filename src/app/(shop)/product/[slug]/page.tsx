@@ -4,7 +4,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 // Actions
-import { getProductBySlug } from "@/actions";
+import { getPaginatedProductsWithImages, getProductBySlug } from "@/actions";
 
 // Components
 import { DescriptionProductMobile } from "@/components/product/description/DescriptionProductMobile";
@@ -12,7 +12,6 @@ import { DescriptionProduct } from "@/components/product/description/Description
 import { ProductMobileSlideshow, ProductSlideshow } from "@/components";
 import StockLabel from "@/components/product/stock-label/StockLabel";
 import { ProductViewTracker } from "./ui/ProductViewTracker";
-import InsersectionObserver from "./ui/InsersectionObserver";
 import { ViewerCount } from "./ui/ViewerCount";
 import { StarRating } from "./ui/StarRating";
 import AddToCart from "./ui/AddToCart";
@@ -61,11 +60,14 @@ export async function generateMetadata(
 export default async function ProductPage({ params }: Props) {
   const { slug } = await params;
   const product = await getProductBySlug(slug);
+  const { products } = await getPaginatedProductsWithImages({ page: 1 });
 
   if(!product) notFound();
 
   console.log("params", params);
   console.log("product", product);
+  console.log("products", products);
+  console.log("products filter", products.filter(item => item.tags.includes("airpods") && item.id !== product.id));
 
   return (
     <>
@@ -154,19 +156,16 @@ export default async function ProductPage({ params }: Props) {
 
       <div className="col-span-6 md:px-25 mt-5">
         <h3 className="font-bold text-[1.25rem]">Nuestros clientes también compraron</h3>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
-          <ProductCard
-            product={product}
-          />
-          <ProductCard
-            product={product}
-          />
-          <ProductCard
-            product={product}
-          />
-          <ProductCard
-            product={product}
-          />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-4">
+          {products
+            .filter(item => item.tags.includes("airpods") && item.id !== product.id)
+            .slice(0, 4)
+            .map(item => (
+              <ProductCard
+                key={item.id}
+                product={item}
+              />
+          ))}
         </div>
       </div>
 

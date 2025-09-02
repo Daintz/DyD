@@ -23,7 +23,7 @@ export const PurchasePopup = () => {
   useEffect(() => {
     const FirstDelay = 10000;
     const showMs = 10000;
-    const gapMs = 5000;
+    const gapMs = 10000;
 
     let firstTimeout: ReturnType<typeof setTimeout> | null = null;
     let showTimeout: ReturnType<typeof setTimeout> | null = null;
