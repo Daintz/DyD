@@ -13,6 +13,7 @@ type Props = {
 };
 
 export const ProductCard = ({ product }: Props) => {
+  console.log("product", product);
   return (
     <Link
       href={`/product/${product.slug}`}
@@ -20,7 +21,7 @@ export const ProductCard = ({ product }: Props) => {
       <div className="relative rounded-xl shadow-md hover:shadow-lg transition group p-3">
         <div className="relative">
             <Image
-              src={product.images[1]}
+              src={product.images[0]}
               alt={product.title}
               width={2000}
               height={2000}
