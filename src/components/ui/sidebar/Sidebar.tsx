@@ -109,8 +109,9 @@ export const Sidebar = () => {
 
         <ViewRolAdmin
           rolUser={rolUser}
+          closeSideMenu={closeSideMenu}
         />
       </nav>
     </div>
-  )
-}
+  );
+};

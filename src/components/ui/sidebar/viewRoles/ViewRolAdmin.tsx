@@ -9,9 +9,10 @@ import { IoPeopleOutline, IoTicketOutline } from "react-icons/io5";
 
 interface Props {
   rolUser: "user" | "admin";
+  closeSideMenu: () => void;
 };
 
-const ViewRolAdmin = ({ rolUser }: Props) => {
+const ViewRolAdmin = ({ rolUser, closeSideMenu }: Props) => {
   return (
     <If condition={rolUser === "admin"}>
       <Link
@@ -23,8 +24,9 @@ const ViewRolAdmin = ({ rolUser }: Props) => {
       </Link>
 
       <Link
-        href="/"
+        href="/admin/orders"
         className="flex items-center mt-10 p-2 hover:bg-gray100 rounded transition-all"
+        onClick={() => closeSideMenu()}
       >
         <IoTicketOutline size={30} />
         <span className="ml-3 text-xl">Ordenes</span>
