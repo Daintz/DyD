@@ -19,3 +19,6 @@ export * from "./payments/set-transaction-id";
 export * from "./products/product-pagination";
 export * from "./products/get-product-by-slug";
 export * from "./products/get-stock-by-slug";
+
+export * from "./users/change-user-role";
+export * from "./users/users-paginated-users";
