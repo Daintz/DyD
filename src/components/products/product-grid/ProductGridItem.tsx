@@ -28,11 +28,11 @@ export const ProductGridItem = ({ product }: Props) => {
         <Image
           src={displayImage}
           alt={product.title}
-          className="w-full overflow-hidden rounded h-50 object-cover"
+          className="w-full overflow-hidden rounded h-120 object-cover"
           width={800}
           height={800}
           loading="lazy"
-          onMouseEnter={() => setDisplayImage(product.images[1])}
+          // onMouseEnter={() => setDisplayImage(product.images[1])}
           onMouseLeave={() => setDisplayImage(product.images[0])}
         />
       </Link>

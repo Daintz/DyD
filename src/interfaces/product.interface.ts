@@ -13,6 +13,13 @@ export interface Product {
   //Todo: type: Type;
 };
 
+export  interface ProductImage {
+  id: number;
+  url: string;
+  position: number;
+  productId: string;
+};
+
 export interface CartProduct {
   id: string;
   slug: string;
