@@ -8,14 +8,16 @@ import { getCategories, getProductBySlug } from "@/actions";
 import { Title } from "@/components";
 import { ProductForm } from "./ui/ProductForm";
 
+interface Params {
+  slug: string
+}
+
 interface Props {
-  params: {
-    slug: string;
-  };
+  params: Promise<Params>
 };
 
 export default async function ProductPage({ params }: Props) {
-  const { slug } = params;
+  const { slug } = await params;
 
   const [product, categories] = await Promise.all([
     getProductBySlug(slug),
