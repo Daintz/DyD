@@ -37,7 +37,7 @@ export default async function Home({ searchParams }: Props) {
     <div>
       <MainSection />
 
-      <div className="px-0 sm:px-10">
+      <div>
         <TitleCenter
           title="AirPods"
           subtitle="Conoce todas las generaciones."
@@ -84,7 +84,7 @@ export default async function Home({ searchParams }: Props) {
         />
       </div>
 
-      <div className="px-0 sm:px-10 mt-10">
+      <div className="mt-10">
         <TitleCenter
           title="Apple Watch"
           subtitle="Conoce todos los Apple Watch."
@@ -97,7 +97,7 @@ export default async function Home({ searchParams }: Props) {
         />
       </div>
 
-      <div className="px-0 sm:px-10 mt-10">
+      <div className="mt-10">
         <TitleCenter
           title="Samsung Galaxy Buds"
           subtitle="Conoce todos los Samsung Galaxy Buds."
