@@ -18,7 +18,7 @@ export const DescriptionProductMobile = ({ title, descriptionImages, className }
           width={2000}
           height={2000}
           alt={title}
-          className="mr-5 rounded"
+          className="mr-5 rounded mt-7"
           style={{ maxWidth: '100%', height: 'auto' }}
         />
       ))}
