@@ -33,10 +33,10 @@ export const ProductCard = ({ product }: Props) => {
 
         <div className="mt-1">
           <span className="text-palet-orange font-bold">
-            {formatToCOP(product.priceInOffer)}
+            {formatToCOP(product.price)}
           </span>
           <span className="ml-2 text-gray-400 line-through text-sm">
-            {formatToCOP(product.price)}
+            {formatToCOP(product.priceInOffer)}
           </span>
         </div>
       </div>
