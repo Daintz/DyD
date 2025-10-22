@@ -54,7 +54,7 @@ export const ProductSlideshow = ({ images, title, className }: Props) => {
         </div>
 
         {/* Imagen principal a la derecha */}
-        <div className="col-span-5 h-[550px] lg:h-[700px]">
+        <div className="col-span-5 h-[300px] sm:h-[450px] lg:h-[550px] 3xl:h-[600px]">
           <Swiper
             style={{
               '--swiper-navigation-color': '#fff',
@@ -72,7 +72,7 @@ export const ProductSlideshow = ({ images, title, className }: Props) => {
           >
             {images.map((image, index) => (
               <SwiperSlide key={`main-${index}`}>
-                <div className="relative w-full h-[550px] lg:h-[700px] bg-white rounded-lg overflow-hidden">
+                <div className="relative w-full h-[300px] sm:h-[450px] lg:h-[550px] 3xl:h-[600px] bg-white rounded-lg overflow-hidden">
                   <Image
                     src={`${image}`}
                     alt={`${title} ${index + 1}`}
