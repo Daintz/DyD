@@ -11,20 +11,21 @@ import { DescriptionProductMobile } from "@/components/product/description/Descr
 import { DescriptionProduct } from "@/components/product/description/DescriptionProduct";
 import { ProductMobileSlideshow, ProductSlideshow } from "@/components";
 import StockLabel from "@/components/product/stock-label/StockLabel";
+import { ProductCard } from "@/components/product/card/Card";
 import { ProductViewTracker } from "./ui/ProductViewTracker";
 import { ViewerCount } from "./ui/ViewerCount";
 import { StarRating } from "./ui/StarRating";
+import ButtonSlide from "./ui/ButtonSlide";
 import AddToCart from "./ui/AddToCart";
 
 // Icons
-import { FaTruck, FaShieldAlt, FaStar, FaCheckCircle } from "react-icons/fa";
+import { FaTruck, FaShieldAlt, FaCheckCircle } from "react-icons/fa";
 
 // Fonts
 import { inter } from "@/config/fonts";
 
 // Utils
 import { formatToCOP } from "@/utils";
-import { ProductCard } from "@/components/product/card/Card";
 
 interface Params {
   slug: string
@@ -64,17 +65,12 @@ export default async function ProductPage({ params }: Props) {
 
   if(!product) notFound();
 
-  console.log("params", params);
-  console.log("product", product);
-  console.log("products", products);
-  console.log("products filter", products.filter(item => item.tags.includes("airpods") && item.id !== product.id));
-
   return (
     <>
-      <div className="mt-5 mb-20 grid grid-cols-1 md:grid-cols-5 gap-3">
+      <div className="mt-5 mb-20 grid grid-cols-1 md:grid-cols-6 gap-3">
         <ProductViewTracker product={product} />
 
-        <div className="col-span-1 md:col-span-2">
+        <div className="col-span-1 md:col-span-3">
           <ProductMobileSlideshow
             title={product.title}
             images={product.images.slice(2)}
@@ -86,6 +82,8 @@ export default async function ProductPage({ params }: Props) {
             images={product.images.slice(2)}
             className="hidden md:block"
           />
+
+          <ButtonSlide />
         </div>
 
         <div className="col-span-3 px-5">
@@ -139,7 +137,7 @@ export default async function ProductPage({ params }: Props) {
 
       </div>
 
-      <div className="col-span-6 md:px-25 mt-5">
+      <div id="product-description" className="col-span-6 md:px-25 mt-5">
         <h3 className="font-bold text-[1.25rem]">Descripción</h3>
         <DescriptionProductMobile
           title={product.title}

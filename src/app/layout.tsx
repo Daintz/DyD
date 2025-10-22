@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 
 // Components
+import { TitleWatcher } from "@/components/title/TitleWatcher";
 import { Provider } from "@/components";
 
 // Fonts
@@ -9,7 +10,6 @@ import { inter } from "@/config/fonts";
 
 // Styles
 import "./globals.css";
-import { TitleWatcher } from "@/components/title/TitleWatcher";
 
 export const metadata: Metadata = {
   title: {
